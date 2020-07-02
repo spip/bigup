@@ -7,8 +7,9 @@
 	class="file bigup[ (#ENV{class})]"
 	[(#GET{multiple}|oui)multiple ]
 	[accept="(#ENV{accept}|attribut_html)"]
-	data-token="#ENV{token,#BIGUP_TOKEN}"[
-	data-maxFiles="(#ENV{maxFiles})"][
-	data-maxFileSize="(#ENV{maxFileSize})"][
-	data-previsualiser="(#ENV{previsualiser}|?{oui})"]
+	data-token="[(#ENV{token,#BIGUP_TOKEN}|attribut_html)]"[
+	data-maxFiles="(#ENV{maxFiles}|attribut_html)"][
+	data-maxFileSize="(#ENV{maxFileSize}|attribut_html)"][
+	data-previsualiser="(#ENV{previsualiser}|?{oui})"][
+	data-drop-zone-extended="(#ENV{drop_zone_extended}|attribut_html)"]
 />

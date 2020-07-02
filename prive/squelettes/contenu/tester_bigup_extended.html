@@ -1,0 +1,19 @@
+[(#AUTORISER{configurer,_bigup}|sinon_interdire_acces)]
+
+<h1 class="grostitre">Test d'uploads CVT avec Big Upload</h1>
+
+<h2>Contenu de page</h2>
+
+<ul class="spip">
+	<li>[(#SELF|parametre_url{target,''}|lien_ou_expose{"Ne pas étendre",#ENV{target}|non})]</li>
+	<li>[(#SELF|parametre_url{target,form}|lien_ou_expose{"Étendre sur le formulaire",#ENV{target}|=={form}})]</li>
+	<li>[(#SELF|parametre_url{target,bloc}|lien_ou_expose{"Étendre sur le conteneur",#ENV{target}|=={bloc}})]</li>
+</ul>
+
+<div class="ajax">
+	[(#FORMULAIRE_TESTER_BIGUP_EXTENDED{1,#ENV{target},#contenu})]
+</div>
+
+<div class="ajax">
+	[(#FORMULAIRE_TESTER_BIGUP_EXTENDED{2,#ENV{target},#contenu})]
+</div>
