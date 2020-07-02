@@ -81,7 +81,7 @@
 }
 .bigup-extended-drop-zone {
 }
-#chemin,#pied,#navigation {
+#chemin,#pied,#navigation,#extra {
 	position: relative;
 	z-index: 2;
 }
@@ -96,13 +96,10 @@
 	background: #fff;
 	opacity: 0.01;
 	border-radius: 40px;
-	pointer-events: none; /* laisser passer les clics même si le bloc est au-dessus d'autres */
 }
 
 #contenu.bigup-extended-drop-zone.drag-over::before {
-	background: #ddd;
-	border:5px #333 dashed;
-	opacity: 0.5;
+	z-index: 3;
 }
 
 #navigation.bigup-extended-drop-zone {
@@ -120,6 +117,9 @@
 	background: #fff;
 	opacity: 0.01;
 	border-radius: 40px;
+}
+#navigation.bigup-extended-drop-zone.drag-over::before {
+	z-index:6;
 }
 
 .bigup-extended-drop-zone.drag-over::before {
