@@ -74,60 +74,30 @@
 
 
 
-
+/*
+ * Zones de dépot étendues
+ */
 #page {
 	overflow: hidden;
 	position: relative;
 }
-.bigup-extended-drop-zone {
-}
+
 #chemin,#pied,#navigation,#extra {
 	position: relative;
 	z-index: 2;
 }
-#contenu.bigup-extended-drop-zone::before {
-	content:'';
-	display: block;
-	position: absolute;
-	top:10px;
-	bottom:10px;
-	#GET{left}: 10px;
-	right: 10px;
-	background: #fff;
-	opacity: 0.01;
-	border-radius: 40px;
-}
 
-#contenu.bigup-extended-drop-zone.drag-over::before {
-	z-index: 3;
-}
-
-#navigation.bigup-extended-drop-zone {
-	position: relative;
-	z-index: 5;
-}
-#navigation.bigup-extended-drop-zone::before {
-	content:'';
-	display: block;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	#GET{left}: -50vw;
-	#GET{right}: -10px;
-	background: #fff;
-	opacity: 0.01;
-	border-radius: 40px;
-}
-#navigation.bigup-extended-drop-zone.drag-over::before {
-	z-index:6;
-}
-
+/* décoration de base */
+.bigup-extended-drop-zone {}
+.bigup-extended-drop-zone::before { z-index: -1; }
 .bigup-extended-drop-zone.drag-over::before {
 	background: #ddd !important;
 	border:5px #333 dashed !important;
 	opacity: 0.5 !important;
+	z-index: 0;
 }
 
+/* Cible de la zone de dépot étendue */
 .drag-target {
 	position: relative;
 	z-index: 2000;
@@ -144,23 +114,69 @@
 	border:5px dashed ##ENV{couleur_foncee,3874b0};
 }
 
+/* Sans dépot étendue, le bloc extended correspond à la zone habituelle de bigup */
 .formulaire_spip .editer.bigup-extended-drop-zone {
 	position: relative;
 }
 .formulaire_spip .editer.bigup-extended-drop-zone::before {
-	content:'';
-	display: block;
-	position: absolute;
 	top:10px;
 	bottom:10px;
 	#GET{left}: 10px;
 	#GET{right}: 10px;
 	background: transparent;
 	z-index: -1;
-	border-radius: 40px;
 }
 .formulaire_spip .editer.bigup-extended-drop-zone.drag-over::before {
 	border:5px #333 dashed;
 	opacity: 0.5;
 	z-index: 0;
+}
+
+/* Cas de zone étendues particulières */
+.formulaire_spip.bigup-extended-drop-zone::before,
+#navigation.bigup-extended-drop-zone::before,
+#contenu.bigup-extended-drop-zone::before {
+	content: '';
+	display: block;
+	position: absolute;
+}
+/* Un formulaire SPIP conteneur */
+.formulaire_spip.bigup-extended-drop-zone::before {
+	top: -10px;
+	bottom: -10px;
+	#GET{left}: -10px;
+	#GET{right}: -10px;
+	border-radius: 20px;
+}
+
+/* Le bloc #contenu */
+#contenu.bigup-extended-drop-zone::before {
+	top:10px;
+	bottom:10px;
+	#GET{left}: 10px;
+	right: 10px;
+	background: #fff;
+	opacity: 0.01;
+	border-radius: 40px;
+}
+#contenu.bigup-extended-drop-zone.drag-over::before {
+	z-index: 3;
+}
+
+/* Le bloc #navigation */
+#navigation.bigup-extended-drop-zone {
+	position: relative;
+	z-index: 5;
+}
+#navigation.bigup-extended-drop-zone::before {
+	top: 0;
+	bottom: 0;
+	#GET{left}: -50vw;
+	#GET{right}: -10px;
+	background: #fff;
+	opacity: 0.01;
+	border-radius: 40px;
+}
+#navigation.bigup-extended-drop-zone.drag-over::before {
+	z-index:6;
 }
