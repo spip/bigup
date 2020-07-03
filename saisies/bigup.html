@@ -1,6 +1,6 @@
 #SET{multiple,#ENV{multiple}|=={oui}}
 
-[(#INCLURE{fond=saisies/inc-bigup_liste_fichiers, nom, multiple, fichiers})]
+[(#INCLURE{fond=saisies/inc-bigup_liste_fichiers, nom, multiple, fichiers=#ENV{fichiers,#ENV{_bigup_fichiers}}})]
 
 <input type="file"
 	name="[(#ENV{nom}|bigup_nom2name)][(#GET{multiple}|?{\[\]})]"
