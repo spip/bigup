@@ -430,14 +430,13 @@ Bigup.prototype = {
 			$zone_depot = this.form.find(".dropfile_" + this.class_name);
 		}
 
-		// gerer une eventuelle zonne etendue
+		// gerer une eventuelle zone etendue
 		var $depot_etendu = $zone_depot;
 		var depot_etendu = this.input.data('drop-zone-extended');
 		if (typeof depot_etendu !== "undefined") {
 			$depot_etendu = jQuery(depot_etendu)
 				.not('.bigup-extended-drop-zone')
 				.addClass('bigup-extended-drop-zone')
-				.data('dropfile-class', ".dropfile_" + this.class_name)
 				.data('bigup', this)
 				.add($zone_depot);
 		}
@@ -851,6 +850,16 @@ Bigup.prototype = {
 		}, this);
 	},
 
+	removeExtendedDropZone: function() {
+		$depot_etendu = this.zones.depot_etendu;
+		this.unAssignDrop($depot_etendu);
+		$depot_etendu
+			.removeClass('bigup-extended-drop-zone')
+			.off('dragenter dragover')
+			.off('dragleave drop')
+			.removeData('bigup');
+	},
+
 	/**
 	 * A drag event contain files ?
 	 * @param MouseEvent event
@@ -889,16 +898,11 @@ $.bigup_enlever_fichier = function(me) {
 $.bigup_verifier_depots_etendus = function() {
 	// desactiver toutes les data-drop-zone-extended qui ne sont plus liees a un input present dans le html
 	jQuery('.bigup-extended-drop-zone').each(function (){
-		var c = jQuery(this).data('dropfile-class');
-		if (!c || !jQuery(c).length) {
-			var me = jQuery(this);
-			var bigup = me.data('bigup');
-			bigup.flow.unAssignDrop(me);
-			me
-				.removeClass('bigup-extended-drop-zone')
-				.off('dragenter dragover')
-				.off('dragleave drop')
-				.data('dropfile-class','');
+		var bigup = jQuery(this).data('bigup');
+		if (!bigup) {
+			$(this).removeClass('bigup-extended-drop-zone')
+		} else if (!document.body.contains(bigup.zones.depot.get(0))) {
+			bigup.removeExtendedDropZone();
 		}
 	});
 }
