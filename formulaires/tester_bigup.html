@@ -16,7 +16,7 @@
 	<form method="post" action="#ENV{action}" enctype="multipart/form-data">
 	<div>
 		#ACTION_FORMULAIRE
-		<input type="submit" class="submit hidden" value="<:bouton_enregistrer:>" />
+		<input type="submit" class="submit hidden" value="<:bouton_enregistrer|attribut_html:>" />
 
 		<div class='editer-groupe'>
 			[(#SAISIE{input, titre,
@@ -75,7 +75,7 @@
 		</div>
 
 		<div class="boutons">
-			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+			<input type="submit" class="submit" value="<:bouton_enregistrer|attribut_html:>" />
 		</div>
 	</div>
 	</form>
