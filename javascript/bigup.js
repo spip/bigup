@@ -247,6 +247,8 @@ function Bigup(params, opts, callbacks) {
 	this.onDropExtended = function (event) {
 		if (me.eventHasFiles(event)) {
 			me.flow.onDrop(event);
+			/* Parfois on arrive à droper sur un bigup alors qu’une zone étendue d’un autre bigup est ouverte */
+			$('.bigup-extended-drop-zone.drag-over').trigger('dragleave');
 		}
 	}
 }
