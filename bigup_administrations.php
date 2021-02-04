@@ -24,16 +24,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function bigup_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = [];
 
+	$max_file_size_php = 0;
 	include_spip('medias_fonctions');
 	if (function_exists('medias_inigetoctets')) {
-		$max_file_size = medias_inigetoctets('upload_max_filesize') / (1024 * 1024);
-	} else {
-		$max_file_size = 5;
+		$max_file_size_php = medias_inigetoctets('upload_max_filesize') / (1024 * 1024);
 	}
 
 	// Configuration par défaut
 	$config_defaut = [
-		'max_file_size' => $max_file_size,
+		'max_file_size' => max($max_file_size_php, 10),
 	];
 
 	$maj['create'] = [['ecrire_meta', 'bigup', serialize($config_defaut)]];
