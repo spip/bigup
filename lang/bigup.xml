@@ -1,0 +1,16 @@
+<traduction
+	module="bigup"
+	id="bigup--bigup-88e7b"
+	gestionnaire="salvatore"
+	url="https://trad.spip.net"
+	source="https://git.spip.net/spip/bigup.git"
+	reference="fr">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/bigup-bigup?lang_cible=en" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Aku Marani" lien="https://trad.spip.net/auteur/akomarani" />
+		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="jcvilleneuve" lien="https://trad.spip.net/auteur/jcvilleneuve" />
+		<traducteur nom="kent1" lien="https://trad.spip.net/auteur/kent1" />
+		<traducteur nom="tcharlss" lien="https://trad.spip.net/auteur/drbouvierleduc" />
+	</langue>
+	<langue code="fr" url="https://trad.spip.net/tradlang_module/bigup-bigup?lang_cible=fr" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00" />
+</traduction>
