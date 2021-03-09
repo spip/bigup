@@ -144,10 +144,12 @@ class Repondre {
 			# Files::integrer_fichier($res);
 
 			// envoyer quelques infos sur le fichier reçu
-			$desc = CacheFichiers::obtenir_description_fichier($res);
-			$desc = self::nettoyer_description_fichier_retour_ajax($desc);
+			if ($desc = CacheFichiers::obtenir_description_fichier($res)
+			  and $desc = self::nettoyer_description_fichier_retour_ajax($desc)) {
 
-			$this->send(200, $desc);
+				$this->send(200, $desc);
+			}
+
 		}
 
 		$this->send($res->code, $res->data);

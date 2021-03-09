@@ -114,13 +114,14 @@ class CacheRepertoire {
 			}
 
 			$chemin = $filename->getPathname();
-			$description = CacheFichiers::obtenir_description_fichier($chemin);
-			$champ = $description['bigup']['champ'];
+			if ($description = CacheFichiers::obtenir_description_fichier($chemin)) {
+				$champ = $description['bigup']['champ'];
 
-			if (empty($liste[$champ])) {
-				$liste[$champ] = [];
+				if (empty($liste[$champ])) {
+					$liste[$champ] = [];
+				}
+				$liste[$champ][] = $description;
 			}
-			$liste[$champ][] = $description;
 		}
 
 		return $liste;
