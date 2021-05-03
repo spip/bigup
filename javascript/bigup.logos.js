@@ -44,7 +44,15 @@ function formulaires_logos_avec_bigup() {
 				});
 		})
 		.closest('.editer').find('.dropfiletext').html(_T('bigup:deposer_le_logo_ici'));
-	formulaire_editer_logo.find('.btn-upload').hide();
+	// Si l'input d'upload est tout seul dans un .boutons, cacher ce dernier, sinon juste l'input
+	var
+		$input_upload = formulaire_editer_logo.find('.btn-upload'),
+		$boutons = $input_upload.parents('.boutons');
+	if ($boutons.length > 0 && $input_upload.siblings().length === 0) {
+		$boutons.hide();
+	} else {
+		$input_upload.hide();
+	}
 }
 
 jQuery(function($) {

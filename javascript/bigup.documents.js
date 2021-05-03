@@ -50,7 +50,17 @@ function formulaires_documents_avec_bigup () {
 					bigup.presenter_erreur(input, _T('bigup:erreur_probleme_survenu'));
 				});
 		});
-	$("input[name='joindre_upload']").hide();
+	// Si les inputs d'upload sont tout seuls dans un .boutons, cacher ce dernier, sinon juste l'input
+	$("input[name='joindre_upload']").each(function() {
+		var
+			$input_upload = $(this),
+			$boutons = $input_upload.parents('.boutons');
+		if ($boutons.length > 0 && $input_upload.siblings().length === 0) {
+			$boutons.hide();
+		} else {
+			$input_upload.hide();
+		}
+	});
 }
 jQuery(function($) {
 	formulaires_documents_avec_bigup();
