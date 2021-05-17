@@ -236,7 +236,14 @@ function bigup_formulaire_traiter($flux) {
  * @return array
  */
 function bigup_medias_formulaires_traitements_automatiques() {
-	return ['joindre_document', 'editer_logo', 'editer_document', 'illustrer_document', 'formidable'];
+	return [
+		'configurer_image_fond_login',
+		'editer_logo', 
+		'editer_document', 
+		'illustrer_document', 
+		'formidable',
+		'joindre_document', 
+	];
 }
 
 /**
@@ -373,3 +380,21 @@ function inc_bigup_medias_formulaire_formidable_dist($args, $formulaire) {
 	return $formulaire;
 }
 
+
+/**
+ * @param array $args
+ * @param \Spip\Bigup\Formulaire $formulaire
+ * @return \Spip\Bigup\Formulaire
+ */
+function inc_bigup_medias_formulaire_configurer_image_fond_login_dist($args, $formulaire) {
+	$formulaire->preparer_input(
+		'upload_image_fond_login',
+		[
+			'multiple' => false,
+			'previsualiser' => true,
+			'input_class' => 'bigup_simple',
+		]
+	);
+	$formulaire->inserer_js('bigup.simples.js');
+	return $formulaire;
+}
