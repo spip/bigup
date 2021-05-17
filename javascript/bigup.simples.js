@@ -19,7 +19,6 @@ function formulaires_simples_avec_bigup() {
 				// verifier les champs
 				$.post(bigup.target, data, null, 'json')
 					.done(function(erreurs) {
-						console.log(erreurs, data, bigup.name);
 						const erreur = erreurs[bigup.name] || erreurs.message_erreur;
 						if (erreur) {
 							bigup.presenter_erreur(input, erreur);
