@@ -272,7 +272,7 @@ class Formulaire
 	public function inserer_js($script) {
 		$js = find_in_path('javascript/' . $script);
 		if ($js) {
-			$script = "\n" . '<script type="text/javascript" src="' . $js . '"></script>' . "\n";
+			$script = "\n" . '<script type="text/javascript" src="' . timestamp($js) . '"></script>' . "\n";
 			$this->formulaire .= $script;
 		}
 	}
