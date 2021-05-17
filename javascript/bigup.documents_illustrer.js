@@ -21,7 +21,7 @@ function formulaires_documents_illustrer_avec_bigup () {
 			// verifier les champs
 			$.post(bigup.target, data, null, 'json')
 				.done(function(erreurs) {
-					var erreur = data.fichier_upload || erreurs.message_erreur;
+					var erreur = erreurs[bigup.name] || erreurs.message_erreur;
 					if (erreur) {
 						bigup.presenter_erreur(input, erreur);
 					} else {

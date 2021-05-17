@@ -20,7 +20,7 @@ function formulaires_logos_avec_bigup() {
 			// verifier les champs
 			$.post(bigup.target, data, null, 'json')
 				.done(function(erreurs) {
-					var erreur = data.logo_on || data.logo_off || erreurs.message_erreur;
+					var erreur = erreurs[bigup.name] || erreurs.message_erreur;
 					if (erreur) {
 						bigup.presenter_erreur(input, erreur);
 					} else {
