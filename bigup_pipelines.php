@@ -237,7 +237,7 @@ function bigup_formulaire_traiter($flux) {
  */
 function bigup_medias_formulaires_traitements_automatiques() {
 	return [
-		'configurer_image_fond_login',
+		'configurer_ecran_connexion',
 		'editer_logo', 
 		'editer_document', 
 		'illustrer_document', 
@@ -386,13 +386,14 @@ function inc_bigup_medias_formulaire_formidable_dist($args, $formulaire) {
  * @param \Spip\Bigup\Formulaire $formulaire
  * @return \Spip\Bigup\Formulaire
  */
-function inc_bigup_medias_formulaire_configurer_image_fond_login_dist($args, $formulaire) {
+function inc_bigup_medias_formulaire_configurer_ecran_connexion_dist($args, $formulaire) {
 	$formulaire->preparer_input(
 		'upload_image_fond_login',
 		[
 			'multiple' => false,
 			'previsualiser' => true,
 			'input_class' => 'bigup_simple',
+			'editer_class' => '',
 		]
 	);
 	$formulaire->inserer_js('bigup.simples.js');
