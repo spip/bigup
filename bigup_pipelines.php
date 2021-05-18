@@ -393,7 +393,6 @@ function inc_bigup_medias_formulaire_configurer_ecran_connexion_dist($args, $for
 			'multiple' => false,
 			'previsualiser' => true,
 			'input_class' => 'bigup_simple',
-			'editer_class' => '',
 		]
 	);
 	$formulaire->inserer_js('bigup.simples.js');
