@@ -6,7 +6,7 @@
 	background-repeat:no-repeat;
 	background-position: center left;
 }
-<BOUCLE_vignettes(DATA){source tableau,#VAL{prive/vignettes/}|find_all_in_path{[.]png$}}>
+<BOUCLE_vignettes(DATA){source table, #VAL{prive/vignettes/}|find_all_in_path{[.]png$}}>
 #SET{ext,#VALEUR|basename|explode{'.'}|reset}[(#REM)
 ][(#GET{ext}|!={defaut}|?{.vignette_extension.#GET{ext} \{ background-image:url([(#VALEUR|url_absolue)]) \}}][(#REM)
 ]</BOUCLE_vignettes>
