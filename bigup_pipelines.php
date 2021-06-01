@@ -275,8 +275,11 @@ function bigup_medias_formulaire_charger($flux) {
  * @return array
  **/
 function bigup_medias_formulaire_fond($flux) {
+	include_spip('inc/config');
+	
 	if (
-		!empty($flux['args']['contexte']['_bigup_rechercher_fichiers'])
+		(test_espace_prive() or lire_config('bigup/charger_public'))
+		and !empty($flux['args']['contexte']['_bigup_rechercher_fichiers'])
 		and $form = $flux['args']['form']
 	  and $bigup_medias_formulaire = charger_fonction('bigup_medias_formulaire_'.$form, 'inc', true)
 	) {
