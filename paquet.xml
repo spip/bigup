@@ -4,7 +4,7 @@
 	version="2.0.0"
 	schema="1.0.1"
 	etat="test"
-	compatibilite="[4.0.0-alpha;4.0.*]"
+	compatibilite="[4.0.0-beta;4.0.*]"
 	logo="prive/themes/spip/images/bigup-64.png"
 	documentation=""
 >
@@ -31,8 +31,8 @@
 	<pipeline nom="formulaire_verifier" inclure="bigup_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="bigup_pipelines.php" />
 
-	<utilise nom="saisies" compatibilite="[2.17.1;]" />
-	<necessite nom="php" compatibilite="[5.4.0;[" />
+	<utilise nom="saisies" compatibilite="[4.0.0-beta;4.0.*]" />
+	<necessite nom="php" compatibilite="[4.0.0-beta;4.0.*]" />
 
 	<genie nom="nettoyer_repertoire_upload" periode="86400" />
 
