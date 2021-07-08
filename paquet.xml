@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="2.0.2"
 	schema="1.0.1"
-	etat="test"
+	etat="stable"
 	compatibilite="[4.0.0-beta;4.0.*]"
 	logo="prive/themes/spip/images/bigup-64.png"
 	documentation=""
