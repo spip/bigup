@@ -1,9 +1,9 @@
 <paquet
 	prefix="bigup"
 	categorie="multimedia"
-	version="2.0.2"
+	version="2.1.0-dev"
 	schema="1.0.1"
-	etat="test"
+	etat="dev"
 	compatibilite="[4.0.0-beta;4.0.*]"
 	logo="prive/themes/spip/images/bigup-64.png"
 	documentation=""
