@@ -269,7 +269,9 @@ class GestionRepertoires {
 				continue;
 			}
 
-			$fichiers = scandir(_DIR_TMP . $chemin);
+			// on utilise un @ ici car si il y a 2 uploads concurrents ils peuvent se retrouver a cleaner en concurrence
+			// et le repertoire qu'on veut scanner a deja ete supprime
+			$fichiers = @scandir(_DIR_TMP . $chemin);
 			if ($fichiers === false) {
 				$chemin = dirname($chemin);
 				continue;
