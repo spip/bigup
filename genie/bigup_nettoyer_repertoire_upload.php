@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tache de nettoyages de fichiers du plugin Big Upload
  *
@@ -9,7 +10,8 @@
  * @package    SPIP\Bigup\Genie
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) { return;
+}
 
 /**
  * Enlève les fichiers du répertoire de travail de bigup qui sont trop vieux

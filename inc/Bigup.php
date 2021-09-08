@@ -12,7 +12,8 @@ namespace Spip\Bigup;
  * @package    SPIP\Bigup\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) { return;
+}
 
 include_spip('inc/config');
 include_spip('inc/Bigup/LogTrait');
@@ -30,7 +31,6 @@ include_spip('inc/Bigup/Repondre');
  * Gère la validité des requêtes et appelle Flow
 **/
 class Bigup {
-
 	use LogTrait;
 
 	/**
@@ -165,7 +165,7 @@ class Bigup {
 	 */
 	public function supprimer_fichiers($identifiants = []) {
 		if (!$identifiants) {
-			$this->debug("Suppression des fichiers");
+			$this->debug('Suppression des fichiers');
 			$this->cache->supprimer_repertoires();
 		} else {
 			$this->cache->final->supprimer_fichiers($identifiants);

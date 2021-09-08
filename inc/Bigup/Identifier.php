@@ -18,7 +18,6 @@ include_spip('inc/Bigup/LogTrait');
  * Gère l'identification du formulaire
  **/
 class Identifier {
-
 	use LogTrait;
 
 	/**
@@ -120,7 +119,7 @@ class Identifier {
 	 * @return Identifier
 	 */
 	public static function depuisRequest() {
-		$identifier = new self;
+		$identifier = new self();
 		$identifier->recuperer_parametres();
 		return $identifier;
 	}
@@ -219,7 +218,7 @@ class Identifier {
 	 **/
 	public function identifier_formulaire() {
 		include_spip('inc/securiser_action');
-		if ($identifier_args = charger_fonction("identifier", "formulaires/" . $this->formulaire, true)) {
+		if ($identifier_args = charger_fonction('identifier', 'formulaires/' . $this->formulaire, true)) {
 			include_spip('inc/filtres');
 			$args = decoder_contexte_ajax($this->formulaire_args, $this->formulaire);
 			$identite = call_user_func_array($identifier_args, $args);
@@ -262,14 +261,14 @@ class Identifier {
 	 **/
 	public function verifier_token() {
 		if (!$this->token) {
-			$this->debug("Aucun token");
+			$this->debug('Aucun token');
 			return false;
 		}
 
 		$_token = explode(':', $this->token);
 
 		if (count($_token) != 3) {
-			$this->debug("Token mal formé");
+			$this->debug('Token mal formé');
 			return false;
 		}
 
@@ -279,23 +278,23 @@ class Identifier {
 
 
 		if (($now - $time) > $this->token_expiration) {
-			$this->log("Token expiré");
+			$this->log('Token expiré');
 			return false;
 		}
 
 		if (!$this->formulaire) {
-			$this->log("Vérifier token : nom du formulaire absent");
+			$this->log('Vérifier token : nom du formulaire absent');
 			return false;
 		}
 
 		if (!$this->formulaire_args) {
-			$this->log("Vérifier token : hash du formulaire absent");
+			$this->log('Vérifier token : hash du formulaire absent');
 			return false;
 		}
 
 		include_spip('inc/securiser_action');
 		if (!verifier_action_auteur("bigup/$this->formulaire/$this->formulaire_args/$champ/$time", $cle)) {
-			$this->error("Token invalide");
+			$this->error('Token invalide');
 			return false;
 		}
 

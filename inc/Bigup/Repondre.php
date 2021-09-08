@@ -22,7 +22,6 @@ namespace Spip\Bigup;
  *
  **/
 class Repondre {
-
 	use LogTrait;
 
 	/**
@@ -144,12 +143,12 @@ class Repondre {
 			# Files::integrer_fichier($res);
 
 			// envoyer quelques infos sur le fichier reçu
-			if ($desc = CacheFichiers::obtenir_description_fichier($res)
-			  and $desc = self::nettoyer_description_fichier_retour_ajax($desc)) {
-
+			if (
+				$desc = CacheFichiers::obtenir_description_fichier($res)
+				and $desc = self::nettoyer_description_fichier_retour_ajax($desc)
+			) {
 				$this->send(200, $desc);
 			}
-
 		}
 
 		$this->send($res->code, $res->data);
@@ -166,7 +165,7 @@ class Repondre {
 		self::debug("> send $code");
 		http_response_code($code);
 		if ($data) {
-			header("Content-Type: application/json; charset=" . $GLOBALS['meta']['charset']);
+			header('Content-Type: application/json; charset=' . $GLOBALS['meta']['charset']);
 			echo json_encode($data);
 		}
 		exit;

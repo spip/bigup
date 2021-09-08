@@ -5,7 +5,7 @@
  * de l'envoi de fichier, même des gros.
  *
  * Il y a beaucoup de contraintes à gérer :
- * 
+ *
  * - la gestion d'un ou plusieurs champs de type fichier
  * - la gestion de gros fichiers (envois par morceaux (chunk))
  * - la gestion d'une zone de glisser déposer
@@ -14,7 +14,7 @@
  * - la sécurité : ne pas pouvoir exécuter/télécharger les fichiers envoyés directement
  * - la gestion de plusieurs formulaires sur la même page (avec des appels différents) :
  *   ils ne doivent pas se mélanger les pinceaux.
- * 
+ *
  * @package SPIP\Bigup\Formulaires
 **/
 
@@ -28,7 +28,7 @@ function formulaires_tester_bigup_charger_dist($id = 0) {
 	// demander la gestion de fichiers d'upload
 	$valeurs['_bigup_rechercher_fichiers'] = true;
 
-	spip_log("> charger tester_bigup", "bigup");
+	spip_log('> charger tester_bigup', 'bigup');
 
 	return $valeurs;
 }
@@ -38,7 +38,7 @@ function formulaires_tester_bigup_charger_dist($id = 0) {
 function formulaires_tester_bigup_verifier_dist($id = 0) {
 	$erreurs = [];
 
-	spip_log('> verifier tester_bigup', "bigup");
+	spip_log('> verifier tester_bigup', 'bigup');
 
 	// ceux là sont obligatoires
 	foreach (['titre'] as $obli) {
@@ -53,10 +53,10 @@ function formulaires_tester_bigup_verifier_dist($id = 0) {
 
 
 function formulaires_tester_bigup_traiter_dist($id = 0) {
-	spip_log('> traiter tester_bigup', "bigup");
+	spip_log('> traiter tester_bigup', 'bigup');
 
 	$retours = [
-		'message_ok' => "Formulaire pris en compte",
+		'message_ok' => 'Formulaire pris en compte',
 		'editable' => true,
 	];
 
