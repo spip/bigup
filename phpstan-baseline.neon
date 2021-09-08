@@ -1,0 +1,407 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 1
+			path: action/bigup.php
+
+		-
+			message: "#^Function balise_INCLURE not found\\.$#"
+			count: 1
+			path: balise/saisie_fichier.php
+
+		-
+			message: "#^Function balise_INCLURE_dist not found\\.$#"
+			count: 1
+			path: balise/saisie_fichier.php
+
+		-
+			message: "#^Function erreur_squelette not found\\.$#"
+			count: 1
+			path: balise/saisie_fichier.php
+
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 1
+			path: balise/saisie_fichier.php
+
+		-
+			message: "#^Function effacer_meta not found\\.$#"
+			count: 1
+			path: bigup_administrations.php
+
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 2
+			path: bigup_administrations.php
+
+		-
+			message: "#^Function maj_plugin not found\\.$#"
+			count: 1
+			path: bigup_administrations.php
+
+		-
+			message: "#^Function medias_inigetoctets not found\\.$#"
+			count: 1
+			path: bigup_administrations.php
+
+		-
+			message: "#^Function calculer_action_auteur not found\\.$#"
+			count: 1
+			path: bigup_fonctions.php
+
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 1
+			path: bigup_fonctions.php
+
+		-
+			message: "#^Function interprete_argument_balise not found\\.$#"
+			count: 4
+			path: bigup_fonctions.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 1
+			path: bigup_fonctions.php
+
+		-
+			message: "#^Function table_valeur not found\\.$#"
+			count: 2
+			path: bigup_fonctions.php
+
+		-
+			message: "#^Function _T not found\\.$#"
+			count: 1
+			path: bigup_pipelines.php
+
+		-
+			message: "#^Function _request not found\\.$#"
+			count: 6
+			path: bigup_pipelines.php
+
+		-
+			message: "#^Function charger_fonction not found\\.$#"
+			count: 1
+			path: bigup_pipelines.php
+
+		-
+			message: "#^Function find_in_path not found\\.$#"
+			count: 1
+			path: bigup_pipelines.php
+
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 6
+			path: bigup_pipelines.php
+
+		-
+			message: "#^Function lire_config not found\\.$#"
+			count: 5
+			path: bigup_pipelines.php
+
+		-
+			message: "#^Function produire_fond_statique not found\\.$#"
+			count: 2
+			path: bigup_pipelines.php
+
+		-
+			message: "#^Function test_espace_prive not found\\.$#"
+			count: 2
+			path: bigup_pipelines.php
+
+		-
+			message: "#^Function timestamp not found\\.$#"
+			count: 1
+			path: bigup_pipelines.php
+
+		-
+			message: "#^Function _T not found\\.$#"
+			count: 1
+			path: formulaires/tester_bigup.php
+
+		-
+			message: "#^Function _request not found\\.$#"
+			count: 1
+			path: formulaires/tester_bigup.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 3
+			path: formulaires/tester_bigup.php
+
+		-
+			message: "#^Function _T not found\\.$#"
+			count: 1
+			path: formulaires/tester_bigup_extended.php
+
+		-
+			message: "#^Function _request not found\\.$#"
+			count: 1
+			path: formulaires/tester_bigup_extended.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 3
+			path: formulaires/tester_bigup_extended.php
+
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 1
+			path: genie/bigup_nettoyer_repertoire_upload.php
+
+		-
+			message: "#^Function _request not found\\.$#"
+			count: 1
+			path: inc/Bigup.php
+
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 11
+			path: inc/Bigup.php
+
+		-
+			message: "#^Function set_request not found\\.$#"
+			count: 2
+			path: inc/Bigup.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 1
+			path: inc/Bigup.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 1
+			path: inc/Bigup/Cache.php
+
+		-
+			message: "#^Function corriger_extension not found\\.$#"
+			count: 1
+			path: inc/Bigup/CacheFichiers.php
+
+		-
+			message: "#^Function ecrire_fichier not found\\.$#"
+			count: 1
+			path: inc/Bigup/CacheFichiers.php
+
+		-
+			message: "#^Function extraire_attribut not found\\.$#"
+			count: 3
+			path: inc/Bigup/CacheFichiers.php
+
+		-
+			message: "#^Function image_reduire not found\\.$#"
+			count: 1
+			path: inc/Bigup/CacheFichiers.php
+
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 3
+			path: inc/Bigup/CacheFichiers.php
+
+		-
+			message: "#^Function lire_fichier not found\\.$#"
+			count: 2
+			path: inc/Bigup/CacheFichiers.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 1
+			path: inc/Bigup/CacheFichiers.php
+
+		-
+			message: "#^Function supprimer_fichier not found\\.$#"
+			count: 1
+			path: inc/Bigup/CacheFichiers.php
+
+		-
+			message: "#^Function supprimer_timestamp not found\\.$#"
+			count: 1
+			path: inc/Bigup/CacheFichiers.php
+
+		-
+			message: "#^Undefined variable\\: \\$json$#"
+			count: 2
+			path: inc/Bigup/CacheFichiers.php
+
+		-
+			message: "#^Undefined variable\\: \\$vignette$#"
+			count: 2
+			path: inc/Bigup/CacheFichiers.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 1
+			path: inc/Bigup/CacheRepertoire.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 1
+			path: inc/Bigup/Files.php
+
+		-
+			message: "#^Undefined variable\\: \\$x$#"
+			count: 2
+			path: inc/Bigup/Files.php
+
+		-
+			message: "#^Function _T not found\\.$#"
+			count: 1
+			path: inc/Bigup/Flow.php
+
+		-
+			message: "#^Function _request not found\\.$#"
+			count: 3
+			path: inc/Bigup/Flow.php
+
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 1
+			path: inc/Bigup/Flow.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 1
+			path: inc/Bigup/Flow.php
+
+		-
+			message: "#^Function taille_en_octets not found\\.$#"
+			count: 1
+			path: inc/Bigup/Flow.php
+
+		-
+			message: "#^Function find_in_path not found\\.$#"
+			count: 1
+			path: inc/Bigup/Formulaire.php
+
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 4
+			path: inc/Bigup/Formulaire.php
+
+		-
+			message: "#^Function inserer_attribut not found\\.$#"
+			count: 1
+			path: inc/Bigup/Formulaire.php
+
+		-
+			message: "#^Function recuperer_fond not found\\.$#"
+			count: 1
+			path: inc/Bigup/Formulaire.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 1
+			path: inc/Bigup/Formulaire.php
+
+		-
+			message: "#^Function table_valeur not found\\.$#"
+			count: 1
+			path: inc/Bigup/Formulaire.php
+
+		-
+			message: "#^Function timestamp not found\\.$#"
+			count: 1
+			path: inc/Bigup/Formulaire.php
+
+		-
+			message: "#^Function corriger_extension not found\\.$#"
+			count: 1
+			path: inc/Bigup/GestionRepertoires.php
+
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 4
+			path: inc/Bigup/GestionRepertoires.php
+
+		-
+			message: "#^Function jeune_fichier not found\\.$#"
+			count: 1
+			path: inc/Bigup/GestionRepertoires.php
+
+		-
+			message: "#^Function sous_repertoire not found\\.$#"
+			count: 2
+			path: inc/Bigup/GestionRepertoires.php
+
+		-
+			message: "#^Function supprimer_fichier not found\\.$#"
+			count: 1
+			path: inc/Bigup/GestionRepertoires.php
+
+		-
+			message: "#^Function supprimer_repertoire not found\\.$#"
+			count: 6
+			path: inc/Bigup/GestionRepertoires.php
+
+		-
+			message: "#^Function translitteration not found\\.$#"
+			count: 1
+			path: inc/Bigup/GestionRepertoires.php
+
+		-
+			message: "#^Function _request not found\\.$#"
+			count: 3
+			path: inc/Bigup/Identifier.php
+
+		-
+			message: "#^Function charger_fonction not found\\.$#"
+			count: 1
+			path: inc/Bigup/Identifier.php
+
+		-
+			message: "#^Function decoder_contexte_ajax not found\\.$#"
+			count: 1
+			path: inc/Bigup/Identifier.php
+
+		-
+			message: "#^Function encoder_contexte_ajax not found\\.$#"
+			count: 1
+			path: inc/Bigup/Identifier.php
+
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 5
+			path: inc/Bigup/Identifier.php
+
+		-
+			message: "#^Function lire_config not found\\.$#"
+			count: 1
+			path: inc/Bigup/Identifier.php
+
+		-
+			message: "#^Function secret_du_site not found\\.$#"
+			count: 1
+			path: inc/Bigup/Identifier.php
+
+		-
+			message: "#^Function session_get not found\\.$#"
+			count: 2
+			path: inc/Bigup/Identifier.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 1
+			path: inc/Bigup/Identifier.php
+
+		-
+			message: "#^Function verifier_action_auteur not found\\.$#"
+			count: 1
+			path: inc/Bigup/Identifier.php
+
+		-
+			message: "#^Function _request not found\\.$#"
+			count: 2
+			path: inc/Bigup/Repondre.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 1
+			path: inc/Bigup/Repondre.php
+
+		-
+			message: "#^Result of method Spip\\\\Bigup\\\\Repondre\\:\\:send\\(\\) \\(void\\) is used\\.$#"
+			count: 5
+			path: inc/Bigup/Repondre.php
+

@@ -17,7 +17,6 @@ namespace Spip\Bigup;
  * Gère le cache des fichiers dans tmp/bigupload
  **/
 class Cache {
-
 	use LogTrait;
 
 	/**

@@ -18,7 +18,7 @@ namespace Spip\Bigup;
  * @licence    GNU/GPL
  * @package    SPIP\Bigup\Fonctions
  */
- 
+
 include_spip('inc/Bigup/LogTrait');
 
 /**
@@ -38,7 +38,6 @@ class FlowResponse {
  * Réceptionne des morceaux de fichiers envoyés par flow.js
 **/
 class Flow {
-
 	use LogTrait;
 
 	/**
@@ -77,7 +76,7 @@ class Flow {
 	 * Trouve le prefixe utilisé pour envoyer les données
 	 *
 	 * La présence d'une des variables signale un envoi effectué par une des librairies js utilisée.
-	 * 
+	 *
 	 * - 'flow' si flow.js
 	 * - 'resumable' si resumable.js
 	 *
@@ -101,14 +100,14 @@ class Flow {
 	 * Tester l'arrivée du javascript et agir en conséquence
 	 *
 	 * 2 possibilités :
-	 * 
+	 *
 	 * - Le JS demande si un morceau de fichier est déjà présent (par la méthode GET)
 	 * - Le JS poste une partie d'un fichier (par la méthode POST)
 	 *
 	 * Le script retourne
 	 * - le chemin du fichier complet si c’est le dernier morceau envoyé,
 	 * - sinon un [code http, data] à envoyer
-	 * 
+	 *
 	 * @return FlowResponse|string
 	 *     - string : chemin du fichier terminé d’uploadé
 	**/
@@ -116,7 +115,7 @@ class Flow {
 		if (!$this->trouverPrefixe()) {
 			return $this->response(415);
 		}
-		if (!empty($_POST) and !empty($_FILES) ) {
+		if (!empty($_POST) and !empty($_FILES)) {
 			return $this->handleChunk();
 		} elseif (!empty($_GET)) {
 			return $this->handleTestChunk();
@@ -195,16 +194,18 @@ class Flow {
 		$this->info("Réception chunk $identifier n°$chunkNumber");
 
 		if ($maxSize and $totalSize > $maxSize) {
-			$this->info("Fichier reçu supérieur à taille autorisée");
-			return $this->responseError(_T("bigup:erreur_taille_max", ['taille' => taille_en_octets($maxSize)]));
+			$this->info('Fichier reçu supérieur à taille autorisée');
+			return $this->responseError(_T('bigup:erreur_taille_max', ['taille' => taille_en_octets($maxSize)]));
 		}
 
 		$file = reset($_FILES);
 
 		if (!$this->isChunkUploaded($identifier, $filename, $chunkNumber)) {
-			if (!GestionRepertoires::deplacer_fichier_upload(
-				$file['tmp_name'],
-				$this->tmpChunkPathFile($identifier, $filename, $chunkNumber))
+			if (
+				!GestionRepertoires::deplacer_fichier_upload(
+					$file['tmp_name'],
+					$this->tmpChunkPathFile($identifier, $filename, $chunkNumber)
+				)
 			) {
 				return $this->response(415);
 			}
@@ -227,8 +228,8 @@ class Flow {
 			// recomposer le fichier
 			$fullFile = $this->createFileFromChunks($this->getChunkFiles($chemin_parts), $chemin_final);
 			if (!$fullFile) {
-				// on ne devrait jamais arriver là ! 
-				$this->error("! Création du fichier complet en échec (" . $chemin_final . ").");
+				// on ne devrait jamais arriver là !
+				$this->error('! Création du fichier complet en échec (' . $chemin_final . ').');
 				return $this->response(415);
 			}
 
@@ -330,7 +331,7 @@ class Flow {
 	 * Recrée le fichier complet à partir des morceaux de fichiers
 	 *
 	 * Supprime les morceaux si l'opération réussie.
-	 * 
+	 *
 	 * @param array $chunkFiles
 	 *     Chemin des morceaux de fichiers à concaténer (dans l'ordre)
 	 * @param string $destFile Chemin du fichier à créer avec les morceaux
@@ -352,7 +353,7 @@ class Flow {
 		// on le déplace simplement au bon endroit
 		if (count($chunkFiles) == 1) {
 			if (@rename($chunkFiles[0], $destFile)) {
-				$this->info("Fichier complet déplacé : " . $destFile);
+				$this->info('Fichier complet déplacé : ' . $destFile);
 				return $destFile;
 			}
 		}
@@ -367,8 +368,8 @@ class Flow {
 			return false;
 		}
 
-		$this->info("Fichier complet recréé : " . $destFile);
-		$this->debug("Suppression des morceaux.");
+		$this->info('Fichier complet recréé : ' . $destFile);
+		$this->debug('Suppression des morceaux.');
 		foreach ($chunkFiles as $f) {
 			@unlink($f);
 		}

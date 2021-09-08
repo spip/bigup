@@ -36,7 +36,7 @@ class GestionRepertoires {
 		include_spip('inc/charsets');
 		$nom = translitteration($nom);
 		// éviter les balises
-		$nom = preg_replace("/<[^>]*>/", '', $nom);
+		$nom = preg_replace('/<[^>]*>/', '', $nom);
 		// éviter * . " / \ [ ] : ; | = , et bien d'autres
 		$nom = preg_replace('/\W/u', '_', $nom);
 		return $nom;
@@ -68,12 +68,12 @@ class GestionRepertoires {
 	 *     false en cas d'échec
 	 *     Chemin du répertoire sinon
 	 */
-	public static function creer_sous_repertoire($dest){
+	public static function creer_sous_repertoire($dest) {
 		if (!$dest) {
 			return false;
 		}
 
-		$dest = rtrim($dest, "/");
+		$dest = rtrim($dest, '/');
 		$final = basename($dest);
 		$base = dirname($dest);
 		$create = [];
@@ -84,7 +84,7 @@ class GestionRepertoires {
 			$base = dirname($base);
 		}
 
-		while (count($create)){
+		while (count($create)) {
 			if (!is_writable($base)) {
 				return false;
 			}
@@ -309,7 +309,7 @@ class GestionRepertoires {
 	 *     - `false` : valeur par défaut. On ne fait que copier le fichier source vers la destination.
 	 * @return bool|mixed|string
 	 */
-	public static function deplacer_fichier_upload($source, $dest, $move=false) {
+	public static function deplacer_fichier_upload($source, $dest, $move = false) {
 		// Securite
 		if (substr($dest, 0, strlen(_DIR_RACINE)) == _DIR_RACINE) {
 			$dest = _DIR_RACINE . preg_replace(',\.\.+,', '.', substr($dest, strlen(_DIR_RACINE)));
@@ -335,5 +335,4 @@ class GestionRepertoires {
 
 		return $ok ? $dest : false;
 	}
-
 }

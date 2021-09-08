@@ -17,7 +17,6 @@ namespace Spip\Bigup;
  * Gère le cache des fichiers dans tmp/bigupload
  **/
 class CacheRepertoire {
-
 	use LogTrait;
 
 	/**
@@ -162,8 +161,7 @@ class CacheRepertoire {
 	 *     Identifiant du fichier, tel que créé avec CacheFichiers::hash_identifiant()
 	 *     Ou identifiant avant création du hash
 	 **/
-	public function supprimer_fichier($identifiant)
-	{
+	public function supprimer_fichier($identifiant) {
 		if ($identifiant) {
 			$this->supprimer_fichiers([$identifiant]);
 		}
@@ -187,7 +185,7 @@ class CacheRepertoire {
 		$identifiants = array_map('Spip\\Bigup\\CacheFichiers::hash_identifiant', $identifiants); // PHP 5.4
 		#$identifiants = array_map(CacheFichiers::class . '::hash_identifiant', $identifiants);   // PHP >= 5.5
 
-		$this->debug("Demande de suppression de fichiers : " . implode(', ', $identifiants));
+		$this->debug('Demande de suppression de fichiers : ' . implode(', ', $identifiants));
 		foreach ($liste as $champ => $fichiers) {
 			foreach ($fichiers as $description) {
 				if (in_array($description['bigup']['identifiant'], $identifiants)) {
@@ -210,7 +208,4 @@ class CacheRepertoire {
 		GestionRepertoires::supprimer_repertoire($this->dir);
 		return true;
 	}
-
-
-
 }

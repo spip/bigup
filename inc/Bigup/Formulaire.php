@@ -20,7 +20,6 @@ include_spip('inc/flock');
  **/
 class Formulaire
 {
-
 	use LogTrait;
 
 	/**
@@ -123,7 +122,6 @@ class Formulaire
 		$remplacements = 0;
 
 		foreach ($champs as $champ) {
-
 			$regexp = self::regexp_input_name($champ);
 
 			if (preg_match($regexp, $this->formulaire, $regs)) {

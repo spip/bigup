@@ -17,7 +17,6 @@ namespace Spip\Bigup;
  * Gestion des relations avec `$_FILES`
  **/
 class Files {
-
 	use LogTrait;
 
 	/**
@@ -217,7 +216,6 @@ class Files {
 					$liste[$complet][] = $description;
 				}
 			}
-
 		}
 		return $liste;
 	}

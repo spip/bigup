@@ -18,7 +18,6 @@ namespace Spip\Bigup;
  *
  **/
 class CacheFichiers {
-
 	use LogTrait;
 
 	/**
@@ -147,9 +146,9 @@ class CacheFichiers {
 	public static function obtenir_description_fichier($chemin) {
 		$description = self::lire_description_fichier($chemin);
 		if ($description) {
-			self::debug("* Description de : " . $description['name'] . ' (' . $chemin . ')');
+			self::debug('* Description de : ' . $description['name'] . ' (' . $chemin . ')');
 		} else {
-			self::debug("* Description introuvable pour : " . $chemin);
+			self::debug('* Description introuvable pour : ' . $chemin);
 		}
 		return $description;
 	}
@@ -169,16 +168,16 @@ class CacheFichiers {
 	 **/
 	public function decrire_fichier($identifiant, $infos) {
 		if (!is_array($infos)) {
-			self::error("Infos non transmises pour décrire le fichier : " . $identifiant);
+			self::error('Infos non transmises pour décrire le fichier : ' . $identifiant);
 			return false;
 		}
 		if (empty($infos['tmp_name'])) {
-			self::error("Chemin du fichier absent pour décrire le fichier : " . $identifiant);
+			self::error('Chemin du fichier absent pour décrire le fichier : ' . $identifiant);
 			return false;
 		}
 		$chemin = $infos['tmp_name'];
 		if (empty($infos['name'])) {
-			self::error("Nom original du fichier absent pour décrire le fichier : " . $chemin);
+			self::error('Nom original du fichier absent pour décrire le fichier : ' . $chemin);
 			return false;
 		}
 		if (empty($this->champ)) {
@@ -186,7 +185,7 @@ class CacheFichiers {
 			return false;
 		}
 		if (empty($this->identifier->formulaire_identifiant)) {
-			self::error("Identifiant de formulaire absent pour décrire le fichier : " . $chemin);
+			self::error('Identifiant de formulaire absent pour décrire le fichier : ' . $chemin);
 			return false;
 		}
 
@@ -221,7 +220,7 @@ class CacheFichiers {
 		}
 		$chemin = $infos['tmp_name'];
 		if (!file_exists($chemin)) {
-			self::error("Fichier introuvable pour description : " . $chemin);
+			self::error('Fichier introuvable pour description : ' . $chemin);
 			return false;
 		}
 
@@ -234,7 +233,7 @@ class CacheFichiers {
 		];
 
 		if ($diff = array_diff_key(array_flip($obligatoires), $bigup)) {
-			self::error("Description manquante dans (" . implode(',', $diff) . ") : " . $chemin);
+			self::error('Description manquante dans (' . implode(',', $diff) . ') : ' . $chemin);
 			return false;
 		}
 

@@ -23,7 +23,7 @@ trait LogTrait {
 	 * @param int $gravite
 	**/
 	public static function log($quoi, $gravite = _LOG_INFO_IMPORTANTE) {
-		spip_log($quoi, "bigup." . $gravite);
+		spip_log($quoi, 'bigup.' . $gravite);
 	}
 
 	public static function debug($quoi) {

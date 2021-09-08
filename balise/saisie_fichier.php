@@ -10,7 +10,8 @@
  * @package    SPIP\Bigup\Fonctions
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) { return;
+}
 
 include_spip('balise/saisie');
 
@@ -35,13 +36,13 @@ include_spip('balise/saisie');
 function balise_SAISIE_FICHIER_dist($p) {
 
 	if (!class_exists('Pile')) {
-		$msg = array(
+		$msg = [
 			'bigup:zbug_necessite_plugin',
-			array(
+			[
 				'balise' => '#SAISIE_FICHIER',
 				'plugin' => 'saisies',
-			)
-		);
+			]
+		];
 		erreur_squelette($msg, $p);
 		return $p;
 	}

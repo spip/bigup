@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Utilisations de pipelines par Big Upload
  *
@@ -9,7 +10,8 @@
  * @package    SPIP\Bigup\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) { return;
+}
 
 /**
  * Charger des scripts jquery
@@ -174,7 +176,7 @@ function bigup_formulaire_receptionner($flux) {
 
 /**
  * Branchement sur verifier
- * 
+ *
  * - Si on a demandé la suppression d'un fichier, le faire
  * - Nettoyer les fichiers injectés effacés de $_FILES.
  *
@@ -238,11 +240,11 @@ function bigup_formulaire_traiter($flux) {
 function bigup_medias_formulaires_traitements_automatiques() {
 	return [
 		'configurer_ecran_connexion',
-		'editer_logo', 
-		'editer_document', 
-		'illustrer_document', 
+		'editer_logo',
+		'editer_document',
+		'illustrer_document',
 		'formidable',
-		'joindre_document', 
+		'joindre_document',
 	];
 }
 
@@ -276,12 +278,12 @@ function bigup_medias_formulaire_charger($flux) {
  **/
 function bigup_medias_formulaire_fond($flux) {
 	include_spip('inc/config');
-	
+
 	if (
 		(test_espace_prive() or lire_config('bigup/charger_public'))
 		and !empty($flux['args']['contexte']['_bigup_rechercher_fichiers'])
 		and $form = $flux['args']['form']
-	  and $bigup_medias_formulaire = charger_fonction('bigup_medias_formulaire_'.$form, 'inc', true)
+		and $bigup_medias_formulaire = charger_fonction('bigup_medias_formulaire_' . $form, 'inc', true)
 	) {
 		$bigup = bigup_get_bigup(['args' => $flux['args']['contexte']]);
 		$formulaire = $bigup->formulaire($flux['data'], $flux['args']['contexte']);

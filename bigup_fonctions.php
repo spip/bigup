@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Fonctions utiles au plugin Big Upload
  *
@@ -9,7 +10,8 @@
  * @package    SPIP\Bigup\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) { return;
+}
 
 /**
  * Compile la balise `#BIGUP_TOKEN` qui calcule un token
@@ -83,7 +85,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return Champ
  *     Pile complétée par le code à générer
  **/
-function balise_BIGUP_TOKEN($p){
+function balise_BIGUP_TOKEN($p) {
 	if (!$_champ = interprete_argument_balise(1, $p)) {
 		$_champ = "@\$Pile[0]['nom']";
 	}
@@ -110,10 +112,10 @@ function balise_BIGUP_TOKEN($p){
  * Calcule un token en fonction de l'utilisateur, du champ, du formulaire…
  *
  * Retourne un token de la forme `champ:time:clé`
- * 
+ *
  * @uses calculer_action_auteur()
  * @see \Spip\Bigup\Flow::verifier_token()
- * 
+ *
  * @param string $champ
  *      Nom du champ input du formulaire
  * @param string|bool $multiple
@@ -128,8 +130,8 @@ function balise_BIGUP_TOKEN($p){
 **/
 function calculer_balise_BIGUP_TOKEN($champ, $multiple, $form, $form_args) {
 
-	if (!$champ OR !$form OR !$form_args) {
-		spip_log("Demande de token bigup, mais un argument est vide", _LOG_ERREUR);
+	if (!$champ or !$form or !$form_args) {
+		spip_log('Demande de token bigup, mais un argument est vide', _LOG_ERREUR);
 		return false;
 	}
 	$time = time();
@@ -211,7 +213,7 @@ function bigup_nom2name($nom) {
  * return string
 **/
 function bigup_nom2classe($nom) {
-	return str_replace(array('/', '[', ']', '&#91;', '&#93;'), array('_', '_', '', '_', ''), $nom);
+	return str_replace(['/', '[', ']', '&#91;', '&#93;'], ['_', '_', '', '_', ''], $nom);
 }
 
 
@@ -243,7 +245,7 @@ function bigup_name2nom($name) {
 function bigup_get_accept_logos() {
 	$extensions = $GLOBALS['formats_logos'];
 	$mimes = array_map('bigup_get_mime_type_extension', $extensions);
-	return implode(",", $mimes);
+	return implode(',', $mimes);
 }
 
 /**
@@ -257,16 +259,16 @@ function bigup_get_mime_type_extension($extension) {
 	// cas particuliers
 	switch ($extension) {
 		case 'bmp':
-			$mime = "image/x-ms-bmp";
+			$mime = 'image/x-ms-bmp';
 			break;
 		case 'jpg':
-			$mime = "image/jpeg";
+			$mime = 'image/jpeg';
 			break;
 		case 'svg':
-			$mime = "image/svg+xml";
+			$mime = 'image/svg+xml';
 			break;
 		case 'tif':
-			$mime = "image/tiff";
+			$mime = 'image/tiff';
 			break;
 	}
 	return $mime;
