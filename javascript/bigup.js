@@ -227,7 +227,6 @@ function Bigup(params, opts, callbacks) {
 			bigup_token: this.token,
 			formulaire_action: this.formulaire_action,
 			formulaire_action_args: this.formulaire_action_args,
-			accept: this.opts.contraintes.accept, // accept pourra servir au serveur pour éviter un stockage inutile
 		}
 	});
 
