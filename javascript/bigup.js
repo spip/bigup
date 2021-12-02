@@ -221,6 +221,8 @@ function Bigup(params, opts, callbacks) {
 		singleFile: this.singleFile,
 		simultaneousUploads: 2, // 3 par défaut
 		permanentErrors : [403, 404, 413, 415, 500, 501], // ajout de 403 à la liste par défaut.
+		chunkRetryInterval : 1000, // on rééssaye de télécharger le chunk après 1s si erreur
+		maxChunkRetries: 25,
 		onDropStopPropagation: true, // ne pas bubler quand la drop zone est multiple
 		query: {
 			action: "bigup",
@@ -344,18 +346,25 @@ Bigup.prototype = {
 		// Retirer la barre de progression
 		this.flow.on('fileSuccess', function(file, message, chunk){
 			// console.info("success", file, message, chunk);
-			var desc = JSON.parse(message);
-			// enlever le bouton annuler
-			file.emplacement.find(".cancel").fadeOut("normal", function(){
-				$(this).remove();
-				// et mettre un bouton enlever !
-				if (desc.bigup.identifiant) {
-					file.emplacement.data('identifiant', desc.bigup.identifiant);
-					me.ajouter_bouton_enlever(file.emplacement);
-				}
-			});
-			me.progress.retirer(file.emplacement.find("progress"));
-			me.input.trigger('bigup.fileSuccess', [file, desc]);
+			var desc = "";
+			try {
+				desc = JSON.parse(message); 
+				// enlever le bouton annuler
+				file.emplacement.find(".cancel").fadeOut("normal", function(){
+					$(this).remove();
+					// et mettre un bouton enlever !
+					if (desc.bigup.identifiant) {
+						file.emplacement.data('identifiant', desc.bigup.identifiant);
+						me.ajouter_bouton_enlever(file.emplacement);
+					}
+				});
+				me.progress.retirer(file.emplacement.find("progress"));
+				me.input.trigger('bigup.fileSuccess', [file, desc]);
+			} catch(e) {
+				desc = _T('bigup:erreur_de_transfert')+" : "+e;
+				me.progress.retirer(file.emplacement.find("progress"));
+				me.presenter_erreur(file.emplacement, desc);				
+			}
 		});
 
 		// Un fichier a été enlevé, soit par nous, soit par Flow
@@ -384,9 +393,13 @@ Bigup.prototype = {
 			console.warn("error", file, message, chunk);
 			var message_erreur = _T('bigup:erreur_de_transfert');
 			if (message) {
-				data = JSON.parse(message);
-				if (typeof data.error !== 'undefined') {
-					message_erreur = data.error;
+				try {
+					data = JSON.parse(message);
+					if (typeof data.error !== 'undefined') {
+						message_erreur = data.error;
+					}					
+				} catch(e){
+					message_erreur += " : "+e;
 				}
 			}
 			me.progress.retirer(file.emplacement.find("progress"));
