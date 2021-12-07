@@ -287,6 +287,8 @@ Bigup.prototype = {
 				.data('identifiant', identifiant);
 			me.ajouter_bouton_enlever(this);
 		});
+
+		this.input.trigger('bigup.ready', []);
 	},
 
 	/**
@@ -366,7 +368,6 @@ Bigup.prototype = {
 			if (!file.bigup_deleted) {
 				me.enlever_fichier(file.emplacement);
 			}
-
 		});
 
 		// Rajoute l'Events complete()
@@ -614,6 +615,7 @@ Bigup.prototype = {
 			emplacement.animateRemove(function(){
 				$(this).remove();
 				me.adapter_visibilite_zone_depot();
+				me.input.trigger('bigup.fileRemoved', [file]);
 			});
 		})
 		.fail(function() {
