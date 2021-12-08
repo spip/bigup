@@ -115,6 +115,10 @@ $.fn.bigup = function(options, callbacks) {
  * @param {string} [opts.contraintes.accept]
  * @param {int}    [opts.contraintes.maxFiles]
  * @param {int}    [opts.contraintes.maxFileSize]
+ * @param {int}    [opts.flow.simultaneousUploads]
+ * @param {int[]}  [opts.flow.permanentErrors]
+ * @param {int}    [opts.flow.chunkRetryInterval]
+ * @param {int}    [opts.flow.maxChunkRetries]
  * @param [callbacks]
  * @param {function} [callbacks.fileSuccess]
  * @constructor
@@ -150,6 +154,12 @@ function Bigup(params, opts, callbacks) {
 				activer: !!this.input.data("previsualiser"),
 				fileSizeMax: 10 // 10 Mb
 			}
+		},
+		flow: {
+			simultaneousUploads: 2, // 3 par défaut
+			permanentErrors : [403, 404, 413, 415, 500, 501], // ajout de 403 à la liste par défaut.
+			chunkRetryInterval: 1000, // on rééssaye de télécharger le chunk après 1s si erreur
+			maxChunkRetries: 5,
 		},
 		templates: {
 			zones: {
@@ -219,10 +229,10 @@ function Bigup(params, opts, callbacks) {
 		testChunks: true,
 		maxFiles: this.opts.contraintes.maxFiles,
 		singleFile: this.singleFile,
-		simultaneousUploads: 2, // 3 par défaut
-		permanentErrors : [403, 404, 413, 415, 500, 501], // ajout de 403 à la liste par défaut.
-		chunkRetryInterval : 1000, // on rééssaye de télécharger le chunk après 1s si erreur
-		maxChunkRetries: 25,
+		simultaneousUploads: this.opts.flow.simultaneousUploads,
+		permanentErrors : this.opts.flow.permanentErrors,
+		chunkRetryInterval : this.opts.flow.chunkRetryInterval,
+		maxChunkRetries: this.opts.flow.maxChunkRetries,
 		onDropStopPropagation: true, // ne pas bubler quand la drop zone est multiple
 		query: {
 			action: "bigup",
