@@ -167,7 +167,7 @@ class Flow {
 	public function handleTestChunk() {
 		$identifier  = $this->_request('identifier');
 		$filename    = $this->_request('filename');
-		$chunkNumber = $this->_request('chunkNumber');
+		$chunkNumber = (int) $this->_request('chunkNumber');
 
 		$this->info("Test chunk $identifier n°$chunkNumber");
 
@@ -187,9 +187,10 @@ class Flow {
 	public function handleChunk() {
 		$identifier  = $this->_request('identifier');
 		$filename    = $this->_request('filename');
-		$chunkNumber = $this->_request('chunkNumber');
-		$chunkSize   = $this->_request('chunkSize');
-		$totalSize   = $this->_request('totalSize');
+		$chunkNumber = (int) $this->_request('chunkNumber');
+		$chunkSize   = (int) $this->_request('chunkSize');
+		$totalChunks = (int) $this->_request('totalChunks');
+		$totalSize   = (int) $this->_request('totalSize');
 		$maxSize = $this->maxSizeFile * 1024 * 1024;
 
 		$this->info("Réception chunk $identifier n°$chunkNumber");
@@ -211,7 +212,7 @@ class Flow {
 		}
 
 		// tous les morceaux recus ?
-		if ($this->isFileUploadComplete($filename, $identifier, $chunkSize, $totalSize)) {
+		if ($this->isFileUploadComplete($filename, $identifier, $totalSize, $totalChunks)) {
 			$this->info("Chunks complets de $identifier");
 
 			$chemin_parts = $this->cache->parts->fichiers->dir_fichier($identifier, $filename);
@@ -280,21 +281,39 @@ class Flow {
 	 *
 	 * @param string $filename
 	 * @param string $identifier
-	 * @param int $chunkSize
 	 * @param int $totalSize
+	 * @param int $totalChunks Nombre de chunks déclarés par flow
 	 * @return bool
 	**/
-	public function isFileUploadComplete($filename, $identifier, $chunkSize, $totalSize) {
-		if ($chunkSize <= 0) {
-			return false;
-		}
-		$numOfChunks = intval($totalSize / $chunkSize) + ($totalSize % $chunkSize == 0 ? 0 : 1);
-		for ($i = 1; $i <= $numOfChunks; $i++) {
+	public function isFileUploadComplete($filename, $identifier, $totalSize, $totalChunks) {
+		for ($i = 1; $i <= $totalChunks; $i++) {
 			if (!$this->isChunkUploaded($identifier, $filename, $i)) {
 				return false;
 			}
 		}
+		$chunkTotalSize = $this->getChunkTotalSize($filename, $identifier);
+		if ($totalSize < $chunkTotalSize) {
+			$this->error("Taille incorrecte des morceaux pour $identifier : $totalSize attendu, $chunkTotalSize present");
+			return false;
+		}
 		return true;
+	}
+
+	/** 
+	 * Retourne la taille de l’ensemble des morceaux récupérés pour ce fichier
+	 * 
+	 * @param string $identifier
+	 * @param string $filename
+	 * @return int Taille en octets, total des différentes parties
+	 */
+	public function getChunkTotalSize($filename, $identifier) {
+		$chunksDir = $this->cache->parts->fichiers->dir_fichier($identifier, $filename);
+		$chunks = $this->getChunkFiles($chunksDir);
+		$size = 0;
+		foreach ($chunks as $chunk) {
+			$size += filesize($chunk);
+		}
+		return $size;
 	}
 
 	/**
