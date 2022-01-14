@@ -2,6 +2,9 @@
 
 namespace Spip\Bigup;
 
+use \Spip\Bigup\Identifier;
+use \Spip\Bigup\Cache;
+
 /**
  * Gère la réception d'actions ajax
  *
@@ -26,19 +29,16 @@ class Repondre {
 
 	/**
 	 * Identification du formulaire, auteur, champ, tokem
-	 * @var Identifier
 	 */
-	private $identifier = null;
+	private ?Identifier $identifier = null;
 
 
 	/**
 	 * Nom d'une action demandée
 	 *
 	 * Si pas de précision => gestion par Flow
-	 *
-	 * @var string
 	 **/
-	private $action = '';
+	private string $action = '';
 
 	/**
 	 * Identifiant d'un fichier (en cas de suppression demandée)
@@ -49,16 +49,13 @@ class Repondre {
 	 * Soit un identifiant (uniqueIdentifier) qui sert au rangement du fichier, calculé
 	 * par Flow.js ou Resumable.js à partir du nom et de la taille du fichier.
 	 * Cet identifiant là est envoyé si on annule un fichier en cours de téléversement.
-	 *
-	 * @var string
 	 **/
-	private $identifiant = '';
+	private string $identifiant = '';
 
 	/**
 	 * Gestion du cache Bigup
-	 * @var Identifier
 	 */
-	private $cache = null;
+	private ?Cache $cache = null;
 
 	/**
 	 * Constructeur
@@ -76,8 +73,8 @@ class Repondre {
 	 */
 	public static function depuisRequest() {
 		$repondre = new self(Identifier::depuisRequest());
-		$repondre->action = _request('bigup_action');
-		$repondre->identifiant = _request('identifiant');
+		$repondre->action = _request('bigup_action') ?? '';
+		$repondre->identifiant = _request('identifiant') ?? '';
 		return $repondre;
 	}
 
@@ -94,7 +91,7 @@ class Repondre {
 	 **/
 	public function repondre() {
 		if (!$this->identifier->verifier_token()) {
-			return $this->send(403);
+			return static::send(403);
 		}
 
 		if ($this->action) {
@@ -103,7 +100,7 @@ class Repondre {
 				return $this->$repondre_action();
 			}
 			// Action inconnue.
-			return $this->send(403);
+			return static::send(403);
 		}
 
 		return $this->repondre_flow();
@@ -117,14 +114,14 @@ class Repondre {
 	 **/
 	public function repondre_effacer() {
 		if (!$this->identifiant) {
-			return $this->send(404);
+			return static::send(404);
 		}
 		// Soit c'est l'identifiant d'origine de Flow,
 		// Soit c'est l'identifiant du répertoire de ce fichier dans le cache
 		if ($this->cache->supprimer_fichier($this->identifiant)) {
-			return $this->send(201);
+			return static::send(201);
 		}
-		return $this->send(404);
+		return static::send(404);
 	}
 
 
@@ -147,11 +144,11 @@ class Repondre {
 				$desc = CacheFichiers::obtenir_description_fichier($res)
 				and $desc = self::nettoyer_description_fichier_retour_ajax($desc)
 			) {
-				$this->send(200, $desc);
+				static::send(200, $desc);
 			}
 		}
 
-		$this->send($res->code, $res->data);
+		static::send($res->code, $res->data);
 	}
 
 	/**
@@ -166,7 +163,7 @@ class Repondre {
 		http_response_code($code);
 		if ($data) {
 			header('Content-Type: application/json; charset=' . $GLOBALS['meta']['charset']);
-			echo json_encode($data);
+			echo json_encode($data, JSON_THROW_ON_ERROR);
 		}
 		exit;
 	}

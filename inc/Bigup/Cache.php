@@ -2,6 +2,9 @@
 
 namespace Spip\Bigup;
 
+use \Spip\Bigup\CacheRepertoire;
+use \Spip\Bigup\Identifier;
+
 /**
  * Gère le cache des fichiers dans tmp/bigupload
  *
@@ -21,24 +24,20 @@ class Cache {
 
 	/**
 	 * Identification du formulaire, auteur, champ, tokem
-	 * @var Identifier
 	 */
-	private $identifier = null;
+	private ?Identifier $identifier = null;
 
 	/**
-	 * Nom du répertoire, dans _DIR_TMP, qui va stocker les fichiers et morceaux de fichiers
-	 * @var string */
-	private $cache_dir = 'bigupload';
+	 * Nom du répertoire, dans _DIR_TMP, qui va stocker les fichiers et morceaux de fichiers */
+	private string $cache_dir = 'bigupload';
 
 	/**
-	 * Cache des morceaux de fichiers
-	 * @var string */
-	private $parts = '';
+	 * Cache des morceaux de fichiers */
+	private CacheRepertoire $parts;
 
 	/**
-	 * Cache des fichiers complets
-	 * @var string */
-	private $final = '';
+	 * Cache des fichiers complets */
+	private CacheRepertoire $final;
 
 	/**
 	 * Constructeur
@@ -59,7 +58,7 @@ class Cache {
 		if (property_exists($this, $property)) {
 			return $this->$property;
 		}
-		$this->debug("Propriété `$property` demandée mais inexistante.");
+		static::debug("Propriété `$property` demandée mais inexistante.");
 		return null;
 	}
 

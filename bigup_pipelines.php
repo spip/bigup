@@ -59,7 +59,7 @@ function bigup_insert_head($flux) {
 function bigup_header_prive($flux) {
 	include_spip('inc/config');
 	$maxFileSize = intval(lire_config('bigup/max_file_size', 0));
-	$formatLogos = json_encode($GLOBALS['formats_logos']);
+	$formatLogos = json_encode($GLOBALS['formats_logos'], JSON_THROW_ON_ERROR);
 	$flux .= <<<EOS
 <script type='text/javascript'>jQuery.bigup_config = {maxFileSize: $maxFileSize, formatsLogos: $formatLogos}</script>
 EOS;

@@ -21,35 +21,29 @@ class Identifier {
 	use LogTrait;
 
 	/**
-	 * Login ou identifiant de l'auteur qui intéragit
-	 * @var string */
-	private $auteur = '';
+	 * Login ou identifiant de l'auteur qui intéragit */
+	private string $auteur = '';
 
 	/**
-	 * Nom du formulaire qui utilise flow
-	 * @var string */
-	private $formulaire = '';
+	 * Nom du formulaire qui utilise flow */
+	private string $formulaire = '';
 
 	/**
-	 * Hash des arguments du formulaire
-	 * @var string */
-	private $formulaire_args = '';
+	 * Hash des arguments du formulaire */
+	private string $formulaire_args = '';
 
 	/**
-	 * Identifie un formulaire par rapport à un autre identique sur la même page ayant un appel différent.
-	 * @var string */
-	private $formulaire_identifiant = '';
+	 * Identifie un formulaire par rapport à un autre identique sur la même page ayant un appel différent. */
+	private string $formulaire_identifiant = '';
 
 	/**
-	 * Nom du champ dans le formulaire qui utilise flow
-	 * @var string */
-	private $champ = '';
+	 * Nom du champ dans le formulaire qui utilise flow */
+	private string $champ = '';
 
 	/**
 	 * Token de la forme `champ:time:cle`
-	 * @var string
 	 **/
-	private $token = '';
+	private string $token = '';
 
 	/**
 	 * Expiration du token (en secondes)
@@ -57,13 +51,13 @@ class Identifier {
 	 * @todo À définir en configuration
 	 * @var int En secondes
 	 **/
-	private $token_expiration = 86400;
+	private int $token_expiration = 86400;
 
 	/**
 	 * Taille du fichier maximum
 	 * @var int En Mo
 	 */
-	private $max_size_file = 0;
+	private int $max_size_file = 0;
 
 	/**
 	 * Constructeur
@@ -133,7 +127,7 @@ class Identifier {
 		if (property_exists($this, $property)) {
 			return $this->$property;
 		}
-		$this->debug("Propriété `$property` demandée mais inexistante.");
+		static::debug("Propriété `$property` demandée mais inexistante.");
 		return null;
 	}
 
@@ -261,46 +255,46 @@ class Identifier {
 	 **/
 	public function verifier_token() {
 		if (!$this->token) {
-			$this->debug('Aucun token');
+			static::debug('Aucun token');
 			return false;
 		}
 
 		$_token = explode(':', $this->token);
 
 		if (count($_token) != 3) {
-			$this->debug('Token mal formé');
+			static::debug('Token mal formé');
 			return false;
 		}
 
-		list($champ, $time, $cle) = $_token;
+		[$champ, $time, $cle] = $_token;
 		$time = intval($time);
 		$now = time();
 
 
 		if (($now - $time) > $this->token_expiration) {
-			$this->log('Token expiré');
+			static::log('Token expiré');
 			return false;
 		}
 
 		if (!$this->formulaire) {
-			$this->log('Vérifier token : nom du formulaire absent');
+			static::log('Vérifier token : nom du formulaire absent');
 			return false;
 		}
 
 		if (!$this->formulaire_args) {
-			$this->log('Vérifier token : hash du formulaire absent');
+			static::log('Vérifier token : hash du formulaire absent');
 			return false;
 		}
 
 		include_spip('inc/securiser_action');
 		if (!verifier_action_auteur("bigup/$this->formulaire/$this->formulaire_args/$champ/$time", $cle)) {
-			$this->error('Token invalide');
+			static::error('Token invalide');
 			return false;
 		}
 
 		$this->champ = $champ;
 
-		$this->debug("Token OK : formulaire $this->formulaire, champ $champ, identifiant $this->formulaire_identifiant");
+		static::debug("Token OK : formulaire $this->formulaire, champ $champ, identifiant $this->formulaire_identifiant");
 
 		return true;
 	}

@@ -2,6 +2,10 @@
 
 namespace Spip\Bigup;
 
+use Spip\Bigup\Cache;
+use Spip\Bigup\CacheFichiers;
+use Spip\Bigup\GestionRepertoires;
+
 /**
  * Gère le cache des fichiers dans tmp/bigupload
  *
@@ -21,19 +25,16 @@ class CacheRepertoire {
 
 	/**
 	 * Gestion générale du cache
-	 * @var Cache
 	 */
-	private $cache = null;
+	private ?Cache $cache = null;
 
 	/**
-	 * Chemin du répertoire temporaire pour ce formulaire
-	 * @var string */
-	private $dir = '';
+	 * Chemin du répertoire temporaire pour ce formulaire */
+	private string $dir = '';
 
 	/**
-	 *  Chemin du répertoire temporaire pour un champ de formulaire
-	 * @var string */
-	private $fichiers = null;
+	 *  Chemin du répertoire temporaire pour un champ de formulaire */
+	private ?CacheFichiers $fichiers = null;
 
 	/**
 	 * Constructeur
@@ -65,7 +66,7 @@ class CacheRepertoire {
 		if (property_exists($this, $property)) {
 			return $this->$property;
 		}
-		$this->debug("Propriété `$property` demandée mais inexistante.");
+		static::debug("Propriété `$property` demandée mais inexistante.");
 		return null;
 	}
 
@@ -185,7 +186,7 @@ class CacheRepertoire {
 		$identifiants = array_map('Spip\\Bigup\\CacheFichiers::hash_identifiant', $identifiants); // PHP 5.4
 		#$identifiants = array_map(CacheFichiers::class . '::hash_identifiant', $identifiants);   // PHP >= 5.5
 
-		$this->debug('Demande de suppression de fichiers : ' . implode(', ', $identifiants));
+		static::debug('Demande de suppression de fichiers : ' . implode(', ', $identifiants));
 		foreach ($liste as $champ => $fichiers) {
 			foreach ($fichiers as $description) {
 				if (in_array($description['bigup']['identifiant'], $identifiants)) {

@@ -35,15 +35,13 @@ class Bigup {
 
 	/**
 	 * Identification du formulaire, auteur, champ, tokem
-	 * @var Identifier
 	 */
-	private $identifier = null;
+	private ?\Spip\Bigup\Identifier $identifier = null;
 
 	/**
 	 * Gestion du cache Bigup
-	 * @var Identifier
 	 */
-	private $cache = null;
+	private ?\Spip\Bigup\Cache $cache = null;
 
 	/**
 	 * Constructeur
@@ -146,7 +144,7 @@ class Bigup {
 					unset($surveiller[$champ][$i]);
 				}
 			}
-			if (!count($surveiller[$champ])) {
+			if (!(is_countable($surveiller[$champ]) ? count($surveiller[$champ]) : 0)) {
 				unset($surveiller[$champ]);
 			}
 		}
@@ -165,7 +163,7 @@ class Bigup {
 	 */
 	public function supprimer_fichiers($identifiants = []) {
 		if (!$identifiants) {
-			$this->debug('Suppression des fichiers');
+			static::debug('Suppression des fichiers');
 			$this->cache->supprimer_repertoires();
 		} else {
 			$this->cache->final->supprimer_fichiers($identifiants);

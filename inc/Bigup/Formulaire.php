@@ -2,6 +2,9 @@
 
 namespace Spip\Bigup;
 
+
+use \Spip\Bigup\Identifier;
+
 /**
  * Gère les modifications du html d'un formulaire existant
  *
@@ -24,21 +27,18 @@ class Formulaire
 
 	/**
 	 * Identification du formulaire, auteur, champ, tokem
-	 * @var Identifier
 	 */
-	private $identifier = null;
+	private ?Identifier $identifier = null;
 
 	/**
 	 * Code HTML du formulaire
-	 * @var string
 	 */
-	private $formulaire = '';
+	private string $formulaire = '';
 
 	/**
 	 * Contexte d'environnement du formulaire
-	 * @var string
 	 */
-	private $contexte = [];
+	private array $contexte = [];
 
 	/**
 	 * Constructeur

@@ -2,6 +2,8 @@
 
 namespace Spip\Bigup;
 
+use \Spip\Bigup\Cache;
+
 /**
  * Intégration de flow.js (ou resumable.js) côté PHP
  *
@@ -42,19 +44,17 @@ class Flow {
 
 	/**
 	 * Gestion du cache Bigup
-	 * @var Cache
 	 */
-	private $cache = null;
+	private ?Cache $cache = null;
 
 	/**
-	 * Préfixe utilisé par la librairie JS lors d'une requête
-	 * @var string */
-	private $prefixe = 'flow';
+	 * Préfixe utilisé par la librairie JS lors d'une requête */
+	private string $prefixe = 'flow';
 
 	/**
 	 * Taille de fichier maximum
 	 */
-	private $maxSizeFile = 0;
+	private int $maxSizeFile = 0;
 
 	/**
 	 * Constructeur
@@ -168,7 +168,7 @@ class Flow {
 		$filename    = $this->_request('filename');
 		$chunkNumber = (int) $this->_request('chunkNumber');
 
-		$this->info("Test chunk $identifier n°$chunkNumber");
+		static::info("Test chunk $identifier n°$chunkNumber");
 
 		if (!$this->isChunkUploaded($identifier, $filename, $chunkNumber)) {
 			return $this->response(204);
@@ -192,10 +192,10 @@ class Flow {
 		$totalSize   = (int) $this->_request('totalSize');
 		$maxSize = $this->maxSizeFile * 1024 * 1024;
 
-		$this->info("Réception chunk $identifier n°$chunkNumber");
+		static::info("Réception chunk $identifier n°$chunkNumber");
 
 		if ($maxSize and $totalSize > $maxSize) {
-			$this->info('Fichier reçu supérieur à taille autorisée');
+			static::info('Fichier reçu supérieur à taille autorisée');
 			return $this->responseError(_T('bigup:erreur_taille_max', ['taille' => taille_en_octets($maxSize)]));
 		}
 
@@ -214,14 +214,14 @@ class Flow {
 
 		// tous les morceaux recus ?
 		if ($this->isFileUploadComplete($filename, $identifier, $totalSize, $totalChunks)) {
-			$this->info("Chunks complets de $identifier");
+			static::info("Chunks complets de $identifier");
 
 			$chemin_parts = $this->cache->parts->fichiers->dir_fichier($identifier, $filename);
 			$chemin_final = $this->cache->final->fichiers->path_fichier($identifier, $filename);
 
 			$eviter_concurrence = $chemin_parts . DIRECTORY_SEPARATOR . '.done';
 			if (file_exists($eviter_concurrence)) {
-				$this->debug("Chunks de $identifier déjà en traitement");
+				static::debug("Chunks de $identifier déjà en traitement");
 				return $this->response(200);
 			}
 			touch($eviter_concurrence);
@@ -230,7 +230,7 @@ class Flow {
 			$fullFile = $this->createFileFromChunks($this->getChunkFiles($chemin_parts), $chemin_final);
 			if (!$fullFile) {
 				// on ne devrait jamais arriver là !
-				$this->error('! Création du fichier complet en échec (' . $chemin_final . ').');
+				static::error('! Création du fichier complet en échec (' . $chemin_final . ').');
 				return $this->response(415);
 			}
 
@@ -294,7 +294,7 @@ class Flow {
 		}
 		$chunkTotalSize = $this->getChunkTotalSize($filename, $identifier);
 		if ($totalSize < $chunkTotalSize) {
-			$this->error("Taille incorrecte des morceaux pour $identifier : $totalSize attendu, $chunkTotalSize present");
+			static::error("Taille incorrecte des morceaux pour $identifier : $totalSize attendu, $chunkTotalSize present");
 			return false;
 		}
 		return true;
@@ -372,7 +372,7 @@ class Flow {
 		// on le déplace simplement au bon endroit
 		if (count($chunkFiles) == 1) {
 			if (@rename($chunkFiles[0], $destFile)) {
-				$this->info('Fichier complet déplacé : ' . $destFile);
+				static::info('Fichier complet déplacé : ' . $destFile);
 				return $destFile;
 			}
 		}
@@ -387,8 +387,8 @@ class Flow {
 			return false;
 		}
 
-		$this->info('Fichier complet recréé : ' . $destFile);
-		$this->debug('Suppression des morceaux.');
+		static::info('Fichier complet recréé : ' . $destFile);
+		static::debug('Suppression des morceaux.');
 		foreach ($chunkFiles as $f) {
 			@unlink($f);
 		}

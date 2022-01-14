@@ -82,7 +82,7 @@ class Files {
 			return false;
 		}
 		// si c'était le dernier []
-		if (!count($arborescence)) {
+		if (!(is_countable($arborescence) ? count($arborescence) : 0)) {
 			return (false !== array_search($valeur, $tableau));
 		} else {
 			// champ[][truc]
@@ -150,7 +150,7 @@ class Files {
 						}
 						$me = &$me[$a];
 					} else {
-						$i = count($me);
+						$i = is_countable($me) ? count($me) : 0;
 						$me[$i] = [];
 						$me = &$me[$i];
 					}

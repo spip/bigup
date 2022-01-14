@@ -2,6 +2,10 @@
 
 namespace Spip\Bigup;
 
+
+use \Spip\Bigup\CacheRepertoire;
+use \Spip\Bigup\Identifier;
+
 /**
  * Gère le cache des fichiers dans tmp/bigupload
  *
@@ -21,19 +25,16 @@ class CacheFichiers {
 	use LogTrait;
 
 	/**
-	 * Cache racine du stockage
-	 * @var CacheRepertoire */
-	private $cache = null;
+	 * Cache racine du stockage */
+	private ?CacheRepertoire $cache = null;
 
 	/**
-	 * Identification du formulaire
-	 * @var Identifier */
-	private $identifier = null;
+	 * Identification du formulaire */
+	private ?Identifier $identifier = null;
 
 	/**
-	 * Nom du champ
-	 * @var string */
-	private $champ = null;
+	 * Nom du champ */
+	private ?string $champ = null;
 
 
 	/**
@@ -67,7 +68,7 @@ class CacheFichiers {
 	public function dir_identifiant($identifiant) {
 		return $this->dir_champ()
 			. DIRECTORY_SEPARATOR
-			. $this->hash_identifiant($identifiant);
+			. static::hash_identifiant($identifiant);
 	}
 
 	/**
@@ -300,6 +301,7 @@ class CacheFichiers {
 	 * @return array|bool
 	 */
 	public static function lire_description_fichier($chemin) {
+		$json = null;
 		$cache = self::chemin_description($chemin);
 		if (!lire_fichier($cache, $json)) {
 			return false;
@@ -323,6 +325,7 @@ class CacheFichiers {
 	 *     False si vignette non calculée, tableau avec clés : 'width', 'height', 'data'
 	 */
 	public static function creer_vignette($desc, $width, $height) {
+		$vignette = null;
 		// description de fichier bigup / files
 		if (
 			!is_array($desc)
