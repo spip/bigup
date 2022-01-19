@@ -6,11 +6,6 @@ parameters:
 			path: action/bigup.php
 
 		-
-			message: "#^Function balise_INCLURE not found\\.$#"
-			count: 1
-			path: balise/saisie_fichier.php
-
-		-
 			message: "#^Function balise_INCLURE_dist not found\\.$#"
 			count: 1
 			path: balise/saisie_fichier.php
@@ -37,11 +32,6 @@ parameters:
 
 		-
 			message: "#^Function maj_plugin not found\\.$#"
-			count: 1
-			path: bigup_administrations.php
-
-		-
-			message: "#^Function medias_inigetoctets not found\\.$#"
 			count: 1
 			path: bigup_administrations.php
 
@@ -221,16 +211,6 @@ parameters:
 			path: inc/Bigup/CacheFichiers.php
 
 		-
-			message: "#^Undefined variable\\: \\$json$#"
-			count: 2
-			path: inc/Bigup/CacheFichiers.php
-
-		-
-			message: "#^Undefined variable\\: \\$vignette$#"
-			count: 2
-			path: inc/Bigup/CacheFichiers.php
-
-		-
 			message: "#^Function spip_log not found\\.$#"
 			count: 1
 			path: inc/Bigup/CacheRepertoire.php
@@ -401,7 +381,7 @@ parameters:
 			path: inc/Bigup/Repondre.php
 
 		-
-			message: "#^Result of method Spip\\\\Bigup\\\\Repondre\\:\\:send\\(\\) \\(void\\) is used\\.$#"
+			message: "#^Result of static method Spip\\\\Bigup\\\\Repondre\\:\\:send\\(\\) \\(void\\) is used\\.$#"
 			count: 5
 			path: inc/Bigup/Repondre.php
 
