@@ -2,8 +2,7 @@
 
 namespace Spip\Bigup;
 
-
-use \Spip\Bigup\Identifier;
+use Spip\Bigup\Identifier;
 
 /**
  * Gère les modifications du html d'un formulaire existant

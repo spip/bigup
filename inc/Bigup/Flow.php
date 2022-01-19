@@ -2,7 +2,7 @@
 
 namespace Spip\Bigup;
 
-use \Spip\Bigup\Cache;
+use Spip\Bigup\Cache;
 
 /**
  * Intégration de flow.js (ou resumable.js) côté PHP
@@ -300,9 +300,9 @@ class Flow {
 		return true;
 	}
 
-	/** 
+	/**
 	 * Retourne la taille de l’ensemble des morceaux récupérés pour ce fichier
-	 * 
+	 *
 	 * @param string $identifier
 	 * @param string $filename
 	 * @return int Taille en octets, total des différentes parties

@@ -2,8 +2,8 @@
 
 namespace Spip\Bigup;
 
-use \Spip\Bigup\Identifier;
-use \Spip\Bigup\Cache;
+use Spip\Bigup\Identifier;
+use Spip\Bigup\Cache;
 
 /**
  * Gère la réception d'actions ajax

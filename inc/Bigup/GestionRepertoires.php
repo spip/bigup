@@ -22,7 +22,6 @@ include_spip('inc/flock');
  *     Certaines fonctions peuvent faire beaucoup d'accès disque.
  **/
 class GestionRepertoires {
-
 	/**
 	 * Pour un nom donné, propose un nom de répertoire valide sur la plupart des systèmes de fichiers
 	 *

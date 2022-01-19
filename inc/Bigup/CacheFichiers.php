@@ -2,9 +2,8 @@
 
 namespace Spip\Bigup;
 
-
-use \Spip\Bigup\CacheRepertoire;
-use \Spip\Bigup\Identifier;
+use Spip\Bigup\CacheRepertoire;
+use Spip\Bigup\Identifier;
 
 /**
  * Gère le cache des fichiers dans tmp/bigupload
