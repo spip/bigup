@@ -17,7 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_charger_public_case' => 'Charger les scripts dans l’espace public',
 	'cfg_max_file_size' => 'Taille maximum des fichiers',
 	'cfg_max_file_size_explication' => 'Taille maximum des fichiers (en Mb).',
-	'cfg_titre_parametrages' => 'Paramétrages de Big Upload',
+	'cfg_titre_parametrages' => 'Téléversement des fichiers',
+	'cfg_explication_parametrages' => 'Ces options ne concernent que les formulaires branchés avec Bigup.',
 	'choisir' => 'Choisir',
 
 	// D

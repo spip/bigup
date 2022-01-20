@@ -403,3 +403,21 @@ function inc_bigup_medias_formulaire_configurer_ecran_connexion_dist($args, $for
 	$formulaire->inserer_js('bigup.simples.js');
 	return $formulaire;
 }
+
+/**
+ * Ajoute la configuration des documents à la page de configuration des contenus
+ *
+ * @pipeline affiche_milieu
+ * @param array $flux
+ * @return array
+ */
+function bigup_affiche_milieu(array $flux) : array {
+	if ($flux['args']['exec'] === 'configurer_avancees') {
+		$flux['data'] .= recuperer_fond(
+			'prive/squelettes/inclure/configurer',
+			['configurer' => 'configurer_bigup']
+		);
+	}
+
+	return $flux;
+}
