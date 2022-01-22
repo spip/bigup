@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_charger_public_case' => 'تحميل الوظيفة في الموقع العمومي',
 	'cfg_max_file_size' => 'الحد الأقصى لحجم الملفات',
 	'cfg_max_file_size_explication' => 'الحد الأقصى لحجم الملفات (بالميغابايت)',
-	'cfg_titre_parametrages' => 'إعداد التحميل الكبير',
+	'cfg_titre_parametrages' => 'إعداد التحميل الكبير', # MODIF
 	'choisir' => 'اختيار',
 
 	// D

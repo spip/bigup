@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_charger_public_case' => 'Load scripts on the public website',
 	'cfg_max_file_size' => 'Maximum size of files',
 	'cfg_max_file_size_explication' => 'Maximum size of files (in Mb).',
-	'cfg_titre_parametrages' => 'Big Upload settings',
+	'cfg_titre_parametrages' => 'Big Upload settings', # MODIF
 	'choisir' => 'Choose',
 
 	// D
