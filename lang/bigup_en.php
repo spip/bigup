@@ -17,9 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_charger_public' => 'Script in the public website',
 	'cfg_charger_public_case' => 'Load scripts on the public website',
+	'cfg_explication_parametrages' => 'These options target only the file fields managed by drag and drop.',
 	'cfg_max_file_size' => 'Maximum size of files',
 	'cfg_max_file_size_explication' => 'Maximum size of files (in Mb).',
-	'cfg_titre_parametrages' => 'Big Upload settings', # MODIF
+	'cfg_titre_parametrages' => 'File Upload',
 	'choisir' => 'Choose',
 
 	// D
