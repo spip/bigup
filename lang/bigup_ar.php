@@ -17,9 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_charger_public' => 'الوظيفة في الموقع العمومي',
 	'cfg_charger_public_case' => 'تحميل الوظيفة في الموقع العمومي',
+	'cfg_explication_parametrages' => 'خذخ الخيارات لا تنطبق الا على حقول الملفات التي تتقبل السحب والرمي.',
 	'cfg_max_file_size' => 'الحد الأقصى لحجم الملفات',
 	'cfg_max_file_size_explication' => 'الحد الأقصى لحجم الملفات (بالميغابايت)',
-	'cfg_titre_parametrages' => 'إعداد التحميل الكبير', # MODIF
+	'cfg_titre_parametrages' => 'تحميل الملفات',
 	'choisir' => 'اختيار',
 
 	// D
