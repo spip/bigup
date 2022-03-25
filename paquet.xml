@@ -4,7 +4,7 @@
 	version="3.0.1"
 	schema="1.0.1"
 	etat="stable"
-	compatibilite="[4.1.0-alpha;4.1.*]"
+	compatibilite="[4.1.0;4.1.*]"
 	logo="prive/themes/spip/images/bigup-64.png"
 	documentation=""
 >
