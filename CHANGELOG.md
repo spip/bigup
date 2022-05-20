@@ -1,27 +1,27 @@
 # Changelog
 
-## [Unreleased]
+## [3.0.3] - 2022-05-20
 
 ### Added
 
 - Fichier CHANGELOG.md
 
 
-### [3.0.2] - 2022-02-25
+## [3.0.2] - 2022-02-25
 
 ### Changed
 
 - Nécessite SPIP 4.1.0 minimum.
 
 
-### [3.0.1] - 2022-02-17
+## [3.0.1] - 2022-02-17
 
 ### Changed
 
 - Mise à jour des chaînes de langues depuis trad.spip.net
 
 
-### [3.0.0] - 2022-02-08
+## [3.0.0] - 2022-02-08
 
 ### Added
 
