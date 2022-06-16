@@ -328,6 +328,7 @@ Bigup.prototype = {
 		// Valider le fichier déposé en fonction du 'accept' de l'input (si présent).
 		this.flow.on('fileAdded', function(file,  event) {
 			me.ajouter_fichier(file);
+			me.input.trigger('bigup.fileAdded', [file]);
 			me.adapter_visibilite_zone_depot();
 			if (!me.accepter_fichier(file)) {
 				me.presenter_erreur(file.emplacement, file.erreur);
@@ -340,6 +341,7 @@ Bigup.prototype = {
 			if (files.length) {
 				$.each(files, function(key, file) {
 					me.progress.ajouter(file.emplacement);
+					me.input.trigger('bigup.fileSubmitted', [file]);
 				});
 				me.flow.upload();
 			}
