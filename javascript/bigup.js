@@ -300,7 +300,7 @@ Bigup.prototype = {
 			me.ajouter_bouton_enlever(this);
 		});
 
-		this.input.trigger('bigup.ready', []);
+		this.input.trigger('bigup.ready', [me]);
 	},
 
 	/**
