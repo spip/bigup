@@ -28,7 +28,7 @@
  * @param object callbacks
  * @return jQuery
  */
-$.fn.bigup = function(options, callbacks) {
+ $.fn.bigup = function(options, callbacks) {
 	// les options… on verra si on l'utilisera
 	var options = options || {};
 	// les callbacks éventuelles directes
@@ -299,6 +299,8 @@ Bigup.prototype = {
 				.data('identifiant', identifiant);
 			me.ajouter_bouton_enlever(this);
 		});
+
+		this.input.trigger('bigup.ready', [me]);
 	},
 
 	/**
@@ -326,6 +328,7 @@ Bigup.prototype = {
 		// Valider le fichier déposé en fonction du 'accept' de l'input (si présent).
 		this.flow.on('fileAdded', function(file,  event) {
 			me.ajouter_fichier(file);
+			me.input.trigger('bigup.fileAdded', [file]);
 			me.adapter_visibilite_zone_depot();
 			if (!me.accepter_fichier(file)) {
 				me.presenter_erreur(file.emplacement, file.erreur);
@@ -338,6 +341,7 @@ Bigup.prototype = {
 			if (files.length) {
 				$.each(files, function(key, file) {
 					me.progress.ajouter(file.emplacement);
+					me.input.trigger('bigup.fileSubmitted', [file]);
 				});
 				me.flow.upload();
 			}
@@ -385,7 +389,6 @@ Bigup.prototype = {
 			if (!file.bigup_deleted) {
 				me.enlever_fichier(file.emplacement);
 			}
-
 		});
 
 		// Rajoute l'Events complete()
@@ -637,6 +640,7 @@ Bigup.prototype = {
 			emplacement.animateRemove(function(){
 				$(this).remove();
 				me.adapter_visibilite_zone_depot();
+				me.input.trigger('bigup.fileRemoved', [file]);
 			});
 		})
 		.fail(function() {
