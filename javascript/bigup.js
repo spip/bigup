@@ -360,7 +360,7 @@ Bigup.prototype = {
 			// console.info("success", file, message, chunk);
 			var desc = "";
 			try {
-				desc = JSON.parse(message); 
+				desc = JSON.parse(message);
 				// enlever le bouton annuler
 				file.emplacement.find(".cancel").fadeOut("normal", function(){
 					$(this).remove();
@@ -375,7 +375,7 @@ Bigup.prototype = {
 			} catch(e) {
 				desc = _T('bigup:erreur_de_transfert')+" : "+e;
 				me.progress.retirer(file.emplacement.find("progress"));
-				me.presenter_erreur(file.emplacement, desc);				
+				me.presenter_erreur(file.emplacement, desc);
 			}
 		});
 
@@ -408,7 +408,7 @@ Bigup.prototype = {
 					data = JSON.parse(message);
 					if (typeof data.error !== 'undefined') {
 						message_erreur = data.error;
-					}					
+					}
 				} catch(e){
 					message_erreur += " : "+e;
 				}
@@ -815,9 +815,17 @@ Bigup.prototype = {
 	 *
 	 * On ne récupère pas les type file, ni sumbit.
 	 *
+	 * @note
+	 *      Dans certains cas (en présence de `name` avec des champs mulitples comme `name="items[]"`),
+	 *      cette fonction ne retourne pas l’ensemble des valeurs attendues…
+	 * @deprecated Use buildFormData() instead
 	 * @return object Couples [nom du champ => valeur]
 	 */
 	getFormData: function () {
+		console.info(
+			'Method `bigup.getFormData` is deprecated and will be removed in future version of Bigup.',
+			'Please use `bigup.buildFormData` instead and adapt your code (see #4861)'
+		);
 		var inputName, inputType;
 		var data = {};
 
@@ -841,6 +849,54 @@ Bigup.prototype = {
 			}
 		});
 		return data;
+	},
+
+	/**
+	 * Récupère les champs que le formulaire poste habituellement
+	 *
+	 * Peut être utile pour faire un hit ajax, sans modifier le formulaire.
+	 * Code en partie repris de dropzone.js
+	 *
+	 * On ne récupère pas les type file, ni sumbit.
+	 *
+	 * @return FormData object
+	 */
+	buildFormData: function() {
+		const formData = new FormData();
+		const form = this.form[0];
+
+		for (let input of form.querySelectorAll(
+			"input, textarea, select, button"
+		)) {
+			let inputName = input.getAttribute("name");
+			let inputType = input.getAttribute("type");
+			if (inputType) inputType = inputType.toLowerCase();
+
+			// If the input doesn't have a name, we can't use it.
+			if (typeof inputName === "undefined" || inputName === null) continue;
+
+			if (input.tagName === "SELECT" && input.hasAttribute("multiple")) {
+				// Possibly multiple values
+				for (let option of input.options) {
+					if (option.selected) {
+						formData.append(inputName, option.value);
+					}
+				}
+			} else if (
+				!inputType ||
+				(
+					inputType !== "checkbox"
+					&& inputType !== "radio"
+					&& inputType !== "file"
+					&& inputType !== "submit"
+				) ||
+				input.checked
+			) {
+				formData.append(inputName, input.value);
+			}
+		}
+
+		return formData;
 	},
 
 
