@@ -11,36 +11,37 @@ function formulaires_simples_avec_bigup() {
 				const bigup = file.bigup;
 				const input = file.emplacement;
 
-				const data = $.extend(bigup.getFormData(), {
-					formulaire_action_verifier_json: true,
-					bigup_reinjecter_uniquement: [description.bigup.identifiant],
-				});
+				const data = bigup.buildFormData();
+				data.set('formulaire_action_verifier_json', true);
+				data.set('bigup_reinjecter_uniquement', [description.bigup.identifiant]);
 
 				// verifier les champs
-				$.post(bigup.target, data, null, 'json')
-					.done(function(erreurs) {
-						const erreur = erreurs[bigup.name] || erreurs.message_erreur;
-						if (erreur) {
-							bigup.presenter_erreur(input, erreur);
-						} else {
-							delete data.formulaire_action_verifier_json;
-							const conteneur = bigup.form.parents('.formulaire_spip');
-							conteneur.animateLoading();
-							// Faire le traitement prévu, supposant qu'il n'y aura pas d'erreur...
-							$.post(bigup.target, data)
-								.done(function(html) {
-									bigup.presenter_succes(input, _T('bigup:succes_logo_envoye'));
-									bigup.form.parents('.formulaire_spip').parent().html(html);
-								})
-								.fail(function(data) {
-									conteneur.endLoading();
-									bigup.presenter_erreur(input, _T('bigup:erreur_probleme_survenu'));
-								});
-						}
-					})
-					.fail(function(data) {
-						bigup.presenter_erreur(input, _T('bigup:erreur_probleme_survenu'));
-					});
+				bigup
+				.send(data, {dataType: 'json'})
+				.done(function(erreurs) {
+					const erreur = erreurs[bigup.name] || erreurs.message_erreur;
+					if (erreur) {
+						bigup.presenter_erreur(input, erreur);
+					} else {
+						data.delete('formulaire_action_verifier_json');
+						const conteneur = bigup.form.parents('.formulaire_spip');
+						conteneur.animateLoading();
+						// Faire le traitement prévu, supposant qu'il n'y aura pas d'erreur...
+						bigup
+						.send(data)
+						.done(function(html) {
+							bigup.presenter_succes(input, _T('bigup:succes_logo_envoye'));
+							bigup.form.parents('.formulaire_spip').parent().html(html);
+						})
+						.fail(function(data) {
+							conteneur.endLoading();
+							bigup.presenter_erreur(input, _T('bigup:erreur_probleme_survenu'));
+						});
+					}
+				})
+				.fail(function(data) {
+					bigup.presenter_erreur(input, _T('bigup:erreur_probleme_survenu'));
+				});
 			});
 
 		// Si l'input d'upload est tout seul dans un .boutons, cacher ce dernier, sinon juste l'input
