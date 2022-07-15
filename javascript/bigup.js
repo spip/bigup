@@ -653,6 +653,7 @@ Bigup.prototype = {
 	 *
 	 * @example
 	 *     bigup.post({ action:bigup_document }).done(function(){ ... });
+	 * @param object data
 	 * @return jqXHR
 	 */
 	post: function(data) {
@@ -664,6 +665,26 @@ Bigup.prototype = {
 		}, data);
 		return $.post(this.target, data);
 	},
+
+	/**
+	 * Poste un FormData sur le formulaire bigup.
+	 *
+	 * @param FormData data
+	 * @param {*} options
+	 * @return jqXHR
+	 */
+	send: function(data, options) {
+		const ajaxOptions = Object.assign({
+			type: "POST",
+			url: this.target,
+			data: data,
+			processData: false,
+			contentType: false,
+			cache: false,
+		}, options || {});
+		return $.ajax(ajaxOptions);
+	},
+
 
 	/**
 	 * Afficher une erreur sur un fichier
