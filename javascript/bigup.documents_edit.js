@@ -14,7 +14,7 @@ function formulaires_documents_edit_avec_bigup () {
 
 			const data = bigup.buildFormData();
 			data.set('joindre_upload', true);
-			data.set('joindre_zip', true);
+			data.set('joindre_zip', true); // les zips sont conservés zippés systématiquement.
 			data.set('formulaire_action_verifier_json', true);
 			data.set('bigup_reinjecter_uniquement', [description.bigup.identifiant]);
 
