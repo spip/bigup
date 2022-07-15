@@ -19,15 +19,8 @@ function formulaires_documents_edit_avec_bigup () {
 			data.set('bigup_reinjecter_uniquement', [description.bigup.identifiant]);
 
 			// verifier les champs
-			$.ajax({
-				type: "POST",
-				url: bigup.target,
-				data: data,
-				processData: false,
-				contentType: false,
-				cache: false,
-				dataType: 'json',
-			})
+			bigup
+			.send(data, {dataType: 'json'})
 			.done(function(erreurs) {
 				var erreur = erreurs[bigup.name] || erreurs.message_erreur;
 				if (erreur) {
@@ -39,14 +32,8 @@ function formulaires_documents_edit_avec_bigup () {
 					var conteneur = bigup.form.parents('.formulaire_editer_document');
 					conteneur.animateLoading();
 					// Faire le traitement prévu, supposant qu'il n'y aura pas d'erreur...
-					$.ajax({
-						type: "POST",
-						url: bigup.target,
-						data: data,
-						processData: false,
-						contentType: false,
-						cache: false,
-					})
+					bigup
+					.send(data)
 					.done(function(html) {
 						bigup.presenter_succes(input, _T('bigup:succes_fichier_envoye'));
 						bigup.form.parents('.formulaire_spip').parent().html(html);
