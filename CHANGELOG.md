@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.1.0] - 2022-07-19
+
+### Added
+
+- #4861 `Bigup.send(FormData)` un raccourci pour poster en ajax le formulaire.
+
+### Fixed
+
+- #4861 Ne pas perdre certains liens de documents en changeant le fichier d’un document avec Bigup
+
+### Deprecated
+
+- #4861 `Bigup.getFormData()` est déprécié. Utiliser `Bigup.buildFormData()`
+
+
 ## [3.0.3] - 2022-05-20
 
 ### Added
