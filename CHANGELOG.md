@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.1.1] - 2022-07-19
+
+### Added
+
+- #4860 Ajout de deux events à l'API JS `bigup.fileAdded` & `bigup.fileSubmitted`
+
+ ### Changed
+
+- #4860 API JS, compléter l'event ready pour lui passer l'objet form en paramètre
+
+
 ## [3.1.0] - 2022-07-19
 
 ### Added
