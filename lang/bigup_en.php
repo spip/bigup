@@ -16,10 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_charger_public' => 'Script in the public website',
-	'cfg_charger_public_case' => 'Load scripts on the public website',
+	'cfg_charger_public_case' => 'Load scripts in the public website',
 	'cfg_explication_parametrages' => 'These options target only the file fields managed by drag and drop.',
-	'cfg_max_file_size' => 'Maximum size of files',
-	'cfg_max_file_size_explication' => 'Maximum size of files (in Mb).',
+	'cfg_max_file_size' => 'Maximum file size',
+	'cfg_max_file_size_explication' => 'Maximum file size (in Mb).',
 	'cfg_titre_parametrages' => 'File Upload',
 	'choisir' => 'Choose',
 
@@ -31,9 +31,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_de_transfert' => 'Upload error',
-	'erreur_probleme_survenu' => 'Some trouble occured…',
+	'erreur_probleme_survenu' => 'A problem occurred…',
 	'erreur_taille_max' => 'Maximum file size is @taille@',
-	'erreur_type_fichier' => 'File type unallowed!',
+	'erreur_type_fichier' => 'Wrong file type!',
 
 	// F
 	'fichier_efface' => 'File deleted',
@@ -52,5 +52,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_configurer_bigup' => 'Big Upload Configuration',
 
 	// Z
-	'zbug_necessite_plugin' => 'The <code>@balise@</code> tag needs the plugin <code>@plugin@</code>'
+	'zbug_necessite_plugin' => 'The <code>@balise@</code> tag requires the plugin <code>@plugin@</code>'
 );
